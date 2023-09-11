@@ -1,6 +1,9 @@
 .DS_STORE
-.node_modules
+*/node_modules
 Gemfile.lock
-yarn.lock
+*/yarn.lock
 package-lock.json
 .ruby-version
+config/database.yml
+config/master.key
+config/credentials.yml.enc
