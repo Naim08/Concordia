@@ -25,6 +25,58 @@ cd frontend
 npm install
 npm start
 ```
+# Feature List
+
+Features are: chat/messaging application similar to Discord, with functionalities surrounding media management, friendships, and server channels.
+
+**1. User Management:**
+   - User Registration using email.
+   - User Login using email and password.
+   - User Profile: Edit profile, change profile picture, update online and custom status.
+   - Session management with session tokens.
+
+**2. Messaging:**
+   - Send and receive real-time messages.
+   - Edit and update messages.
+   - Message status indicators (sent, received, read).
+
+**3. Channels and Servers:**
+   - Create a server with a unique name.
+   - Server owner management.
+   - Create channels within servers, with different types (e.g., text, voice).
+   - Assign a primary or "first" channel to servers.
+   - Edit server and channel details, including adding descriptions.
+
+**4. Media Management:**
+   - Upload files and media.
+   - Store media metadata and attributes such as filename, content type, and size.
+   - Generate unique keys for each media blob.
+   - Create and manage media variants (e.g., resized or compressed versions of images).
+
+**5. Friendships:**
+   - Send and receive friend requests.
+   - Accept or decline friend requests.
+   - List of friends for each user.
+   - Remove or block friends.
+
+**6. Memberships:**
+   - Join servers and be listed as a member.
+   - Assign positions or roles to members (e.g., admin, moderator).
+   - Allow members to have nicknames within servers.
+
+**7. Notifications:**
+   - Notify users of new messages, friend requests, or other important events.
+
+**8. Server Invitations:**
+   - Create unique invite links for servers to allow others to join.
+
+**9. Security and Privacy:**
+   - Password hashing using password_digest.
+   - Secure media access through unique keys.
+
+**10. Search and Filtering:**
+   - Search for users, servers, or channels.
+   - Filter messages or channels based on criteria.
 
 # Schema
 
