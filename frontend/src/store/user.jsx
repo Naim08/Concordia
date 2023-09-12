@@ -1,5 +1,5 @@
 import csrfFetch from "./csrf";
-import { REMOVE_CURRENT_USER } from "./session";
+import { REMOVE_CURRENT_USER, SET_CURRENT_USER } from "./session";
 
 // action types
 const ADD_USER = "users/ADD_USER";
@@ -49,6 +49,9 @@ const usersReducer = (state = {}, action) => {
     case ADD_USER:
       nextState[action.user.id] = action.user;
       return nextState;
+    case SET_CURRENT_USER:
+      if (action.user === null) return {};
+      return { ...nextState, [action.user.id]: action.user };
     case ADD_USERS:
       return { ...nextState, ...action.users };
     case REMOVE_CURRENT_USER:

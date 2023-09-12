@@ -1,11 +1,11 @@
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { Route, Routes } from "react-router-dom";
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { Redirect } from "react-router-dom";
 import SignUpForm from "./components/signup";
+import { fetchUser } from "./store/user";
 
 function App() {
-  const currentUserId = useSelector((state) => state.session.currentUserId);
   return (
     <div>
       <h1>My App</h1>
