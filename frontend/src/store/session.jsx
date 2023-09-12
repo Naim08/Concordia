@@ -111,6 +111,7 @@ const sessionReducer = (state = initialState, action) => {
         nextState["currentUserId"] = null;
       }
       return nextState;
+
     case REMOVE_CURRENT_USER:
       nextState["currentUserId"] = null;
       return nextState;

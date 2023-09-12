@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@rails/actioncable": "^7.0.8",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.8.3",
@@ -12,8 +13,7 @@
     "react-router-dom": "^6.15.0",
     "react-scripts": "5.0.1",
     "redux": "^4.2.1",
-    "redux-thunk": "^2.4.2",
-    "@rails/actioncable": "^7.0.8"
+    "redux-thunk": "^2.4.2"
   },
   "scripts": {
     "start": "react-scripts start",

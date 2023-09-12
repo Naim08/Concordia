@@ -1,10 +1,10 @@
 import { useSelector, useDispatch } from "react-redux";
-import { Route, Routes } from "react-router-dom";
+
 import { useState, useContext, useEffect } from "react";
-import { Redirect } from "react-router-dom";
 import SignUpForm from "./components/signup";
 import { fetchUser } from "./store/user";
-
+import LoginForm from "./components/login";
+import { Routes, Route } from "react-router-dom";
 function App() {
   return (
     <div>
@@ -12,6 +12,7 @@ function App() {
       <Routes>
         <Route path="/" element={<h1>Home</h1>} />
         <Route path="/signup" element={<SignUpForm />} />
+        <Route path="/login" element={<LoginForm />} />
       </Routes>
     </div>
   );

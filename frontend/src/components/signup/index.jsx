@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, Navigate } from "react-router-dom";
 import { signupUser, loginUser } from "../../store/session";
 import "./signup.css";
 
@@ -9,8 +9,11 @@ const SignUpForm = (props) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState([]);
+  const currentUserId = useSelector((state) => state.session.currentUserId);
   const dispatch = useDispatch();
-
+  if (currentUserId) {
+    return <Navigate to="/" />;
+  }
   const onSignUp = async (e) => {
     e.preventDefault();
     setErrors([]);
