@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, Navigate } from "react-router-dom";
-import { signupUser, loginUser } from "../../store/session";
+import { signup, login } from "../../store/session";
 import "./signup.css";
 
 const SignUpForm = (props) => {
@@ -9,16 +9,16 @@ const SignUpForm = (props) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState([]);
-  const currentUserId = useSelector((state) => state.session.currentUserId);
+  const currentUser = useSelector((state) => state.session.currentUser);
   const dispatch = useDispatch();
-  if (currentUserId) {
+  if (currentUser) {
     return <Navigate to="/" />;
   }
   const onSignUp = async (e) => {
     e.preventDefault();
     setErrors([]);
     try {
-      const user = await dispatch(signupUser({ email, username, password }));
+      const user = await dispatch(signup({ email, username, password }));
       setPassword("");
       setUsername("");
       setEmail("");
@@ -90,7 +90,7 @@ const SignUpForm = (props) => {
 
     setErrors([]);
     try {
-      dispatch(loginUser({ credential: "demo-login", password: "password" }));
+      dispatch(login({ credential: "demo-login", password: "password" }));
       // clear input fields
       setEmail("");
       setUsername("");
@@ -105,7 +105,7 @@ const SignUpForm = (props) => {
 
     setErrors([]);
     try {
-      dispatch(loginUser({ credential: "David", password: "password" }));
+      dispatch(login({ credential: "naim08", password: "password" }));
       setEmail("");
       setUsername("");
       setPassword("");

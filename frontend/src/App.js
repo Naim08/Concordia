@@ -1,4 +1,5 @@
 import { useSelector, useDispatch } from "react-redux";
+import "./app.css";
 
 import { useState, useContext, useEffect } from "react";
 import SignUpForm from "./components/signup";
@@ -7,7 +8,7 @@ import LoginForm from "./components/login";
 import { Routes, Route } from "react-router-dom";
 function App() {
   return (
-    <div>
+    <div className="app-container">
       <h1>My App</h1>
       <Routes>
         <Route path="/" element={<h1>Home</h1>} />

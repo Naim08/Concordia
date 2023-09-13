@@ -33,7 +33,7 @@ if (process.env.NODE_ENV !== "production") {
 
 if (
   sessionStorage.getItem("X-CSRF-Token") === null ||
-  sessionStorage.getItem("currentUserId") === null
+  sessionStorage.getItem("currentUser") === null
 ) {
   store.dispatch(sessionActions.restoreSession()).then(renderApp);
 } else {

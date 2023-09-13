@@ -1,0 +1,93 @@
+@font-face {
+  font-family: "gg sans";
+  src: url("./assets/fonts/gg sans Regular.ttf");
+}
+
+@font-face {
+  font-family: "gg sans";
+  src: url("./assets/fonts/gg sans Medium.ttf");
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: "gg sans";
+  src: url("./assets/fonts/gg sans Semibold.ttf");
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: "gg sans";
+  src: url("./assets/fonts/gg sans Bold.ttf");
+  font-weight: 900;
+}
+
+a {
+  text-decoration: none;
+  color: #00a8fc;
+}
+
+body {
+  height: 100vh;
+  height: 100svh;
+  width: 100vw;
+  display: flex;
+  flex-wrap: wrap;
+  font-family: "gg sans", "Noto Sans", Helvetica;
+  background-color: #1a1b1e;
+  color: #f2f3f5;
+
+  overflow: hidden;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+body::-webkit-scrollbar {
+  display: none;
+}
+
+.app-container {
+  display: flex;
+  justify-content: baseline;
+  width: 100vw;
+  height: 100vh;
+  height: 100svh;
+  overflow: hidden;
+}
+
+.app-container.hide {
+  animation: app-page-animate ease-out 0.2s both;
+}
+
+.app-container.show {
+  animation: app-page-animate-show ease-in 0.2s both;
+}
+
+@keyframes app-page-animate {
+  0% {
+    opacity: 1;
+    scale: 1;
+  }
+  100% {
+    opacity: 0;
+    scale: 0.9;
+  }
+}
+
+@keyframes app-page-animate-show {
+  0% {
+    opacity: 0;
+    scale: 0.9;
+  }
+  100% {
+    opacity: 1;
+    scale: 1;
+  }
+}
+
+.disabled {
+  pointer-events: none !important;
+}
+
+.disabled-hover {
+  cursor: not-allowed !important;
+}

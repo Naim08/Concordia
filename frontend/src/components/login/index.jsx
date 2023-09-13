@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { loginUser } from "../../store/session";
+import { login } from "../../store/session";
 import "./login.css";
 import ModalBackground from "../modalbackground";
 import { Navigate } from "react-router-dom";
@@ -11,13 +11,13 @@ const LoginForm = () => {
   const [credential, setCredential] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState([]);
-  const currentUserId = useSelector((state) => state.session.currentUserId);
+  const currentUser = useSelector((state) => state.session.currentUser);
   const handleLogin = async (e) => {
     e.preventDefault();
 
     setErrors([]);
     try {
-      await dispatch(loginUser({ credential, password }));
+      await dispatch(login({ credential, password }));
       setPassword("");
       setCredential("");
     } catch (err) {
@@ -64,9 +64,7 @@ const LoginForm = () => {
 
     setErrors([]);
     try {
-      await dispatch(
-        loginUser({ credential: "demo-login", password: "password" })
-      );
+      await dispatch(login({ credential: "demo-login", password: "password" }));
       setPassword("");
       setCredential("");
     } catch (err) {
@@ -79,14 +77,14 @@ const LoginForm = () => {
 
     setErrors([]);
     try {
-      dispatch(loginUser({ credential: "David", password: "password" }));
+      dispatch(login({ credential: "naim08", password: "password" }));
       setPassword("");
       setCredential("");
     } catch (err) {
       setErrors(err.errors);
     }
   };
-  if (currentUserId) {
+  if (currentUser) {
     return <Navigate to="/" />;
   }
   return (
