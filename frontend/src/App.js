@@ -6,12 +6,14 @@ import SignUpForm from "./components/signup";
 import { fetchUser } from "./store/user";
 import LoginForm from "./components/login";
 import { Routes, Route } from "react-router-dom";
+import Splash from "./components/splash";
+
 function App() {
   return (
     <div className="app-container">
-      <h1>My App</h1>
       <Routes>
-        <Route path="/" element={<h1>Home</h1>} />
+        <Route path="/" element={<Splash />} />
+
         <Route path="/signup" element={<SignUpForm />} />
         <Route path="/login" element={<LoginForm />} />
       </Routes>
