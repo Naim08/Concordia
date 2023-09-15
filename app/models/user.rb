@@ -13,7 +13,8 @@ class User < ApplicationRecord
     presence: true,
     uniqueness: true
   validates :username,
-    presence: true
+            presence: true,
+            uniqueness: true
   validates :email,
     length: { in: 3..255 },
     format: { with: URI::MailTo::EMAIL_REGEXP },

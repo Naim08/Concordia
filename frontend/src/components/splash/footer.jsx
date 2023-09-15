@@ -1,8 +1,11 @@
 import "./footer.css";
 import LogoComponent from "../logo";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { getCurrentUser } from "../../store/session";
 
 const SplashFooter = () => {
+  const currentUser = useSelector(getCurrentUser);
   return (
     <div className="splashfooter-holder">
       <div className="splashfooter-text">
@@ -36,9 +39,13 @@ const SplashFooter = () => {
         <hr className="footer-hr" />
         <div className="footer-bottom">
           <LogoComponent />
-          <Link to="/signup" className="footer-signup">
-            Sign up
-          </Link>
+          {!currentUser ? (
+            <Link to="/signup" className="footer-signup">
+              Sign up
+            </Link>
+          ) : (
+            ""
+          )}
         </div>
       </div>
     </div>

@@ -1,5 +1,6 @@
 .navbar {
-  font-family: "Noto Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "gg sans", "Noto Sans", "Helvetica Neue", Helvetica, Arial,
+    sans-serif;
 
   position: absolute;
   left: 0;
@@ -55,6 +56,9 @@
   font-weight: 400;
   margin-left: 111px;
   transition: color 0.2s, box-shadow 0.2s;
+  font-size: 15px;
+  font-family: "gg2 sans";
+  font-weight: 400;
 }
 
 .navbar-login:hover {

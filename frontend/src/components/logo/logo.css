@@ -1,4 +1,23 @@
 .main-logo {
-  width: 177px;
+  width: 70px;
   cursor: pointer;
+}
+.logo-text {
+  font-size: 40px;
+
+  color: #fff;
+  font-family: "gg2 sans";
+  font-weight: 500;
+  margin: auto;
+  cursor: pointer;
+  top: -20px;
+  position: relative;
+  letter-spacing: 1.3px;
+  color: rgb(255, 255, 255);
+  text-shadow: -1px -1px 1px rgba(255, 255, 255, 0.2),
+    1px 1px 1px rgba(0, 0, 0, 0.6);
+}
+a {
+  color: inherit;
+  text-decoration: none;
 }

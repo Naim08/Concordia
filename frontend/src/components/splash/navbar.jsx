@@ -1,8 +1,17 @@
 import { Link } from "react-router-dom";
 import LogoComponent from "../logo";
 import "./navbar.css";
-
+import { useDispatch, useSelector } from "react-redux";
+import { logout, getCurrentUser } from "../../store/session";
 const NavBar = () => {
+  const dispatch = useDispatch();
+  const currentUser = useSelector(getCurrentUser);
+
+  const handleClick = async (e) => {
+    e.preventDefault();
+    await dispatch(logout());
+  };
+
   return (
     <nav className="navbar">
       <div className="navbar-holder">
@@ -22,9 +31,15 @@ const NavBar = () => {
             <div>Wellfound</div>
           </Link>
         </div>
-        <Link to="/login" className="navbar-login">
-          Login
-        </Link>
+        {currentUser ? (
+          <Link to="/" className="navbar-login" onClick={handleClick}>
+            Logout
+          </Link>
+        ) : (
+          <Link to="/login" className="navbar-login">
+            Login
+          </Link>
+        )}
       </div>
     </nav>
   );
