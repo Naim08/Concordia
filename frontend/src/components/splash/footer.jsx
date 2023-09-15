@@ -36,7 +36,7 @@ const SplashFooter = () => {
         <hr className="footer-hr" />
         <div className="footer-bottom">
           <LogoComponent />
-          <Link to="/register" className="footer-signup">
+          <Link to="/signup" className="footer-signup">
             Sign up
           </Link>
         </div>

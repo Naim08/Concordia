@@ -19,13 +19,12 @@ class Api::UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
-    @user.color ||= Faker::Color.hex_color
 
     if (@user.save)
       login!(@user)
       render :show
     else
-      render json: { errors: @user.errors.full_messages }, status: 422 # maybe make these full errors
+      render json: { errors: @user.errors }, status: :unprocessable_entity
     end
   end
 

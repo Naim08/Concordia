@@ -41,9 +41,10 @@ export const updateUser = (formData, userId) => async (dispatch) => {
     dispatch(addUser(data.user));
   }
 };
-
+const initialUser = JSON.parse(sessionStorage.getItem("currentUser"));
+const initialState = initialUser ? { [initialUser.id]: initialUser } : {};
 // reducer
-const usersReducer = (state = {}, action) => {
+const usersReducer = (state = initialState, action) => {
   const nextState = { ...state };
   switch (action.type) {
     case ADD_USER:

@@ -36,20 +36,36 @@ export const login = (loginInfo) => async (dispatch) => {
       body: JSON.stringify(loginInfo),
     });
 
-    const data = await response.json();
-    storeCurrentUser(data.user);
-    dispatch(setCurrentUser(data.user));
+    if (response.ok) {
+      const data = await response.json();
 
-    return response;
-  } catch (res) {
-    const data = await res.clone().json();
+      if (data.errors) {
+        const errors = {
+          status: response.status,
+          messages: data.errors,
+        };
+        dispatch(addErrors(errors));
+        return;
+      }
+      storeCurrentUser(data.user);
+      dispatch(setCurrentUser(data.user));
+      return response;
+    } else {
+      const data = await response.json();
+      const errors = {
+        status: response.status,
+        messages: data.errors,
+      };
+      dispatch(addErrors(errors));
+    }
+  } catch (error) {
+    const err = await error.json();
+    console.log(err);
 
     const errors = {
-      status: res.status,
-      messages: null,
+      status: error.status,
+      messages: err.errors,
     };
-
-    if (data?.errors) errors.messages = data.errors;
     dispatch(addErrors(errors));
   }
 };
@@ -60,21 +76,35 @@ export const signup = (user) => async (dispatch) => {
       method: "POST",
       body: JSON.stringify(user),
     });
+    if (response.ok) {
+      const data = await response.json();
+      if (data.errors) {
+        const errors = {
+          status: response.status,
+          messages: data.errors,
+        };
+        dispatch(addErrors(errors));
+        return;
+      }
 
-    const data = await response.json();
-    storeCurrentUser(data.user);
-    dispatch(setCurrentUser(data.user));
-
-    return response;
-  } catch (res) {
-    const data = await res.clone().json();
+      storeCurrentUser(data.user);
+      dispatch(setCurrentUser(data.user));
+      return response;
+    } else {
+      const data = await response.json();
+      const errors = {
+        status: response.status,
+        messages: data.errors,
+      };
+      dispatch(addErrors(errors));
+    }
+  } catch (err) {
+    const error = await err.json();
 
     const errors = {
-      status: res.status,
-      messages: null,
+      status: err.status,
+      messages: error.errors,
     };
-
-    if (data?.errors) errors.messages = data.errors;
     dispatch(addErrors(errors));
   }
 };

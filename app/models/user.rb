@@ -43,15 +43,49 @@ class User < ApplicationRecord
 
   has_one_attached :photo
 
-  def self.find_by_credentials(email, password)
-    user = User.find_by(email: email)
-    return user && user.authenticate(password) ? user : nil
+  def self.find_by_credentials(credential, password)
+    email_regex = URI::MailTo::EMAIL_REGEXP
+    if (email_regex.match(credential))
+      user = User.find_by(email: credential)
+    else
+      user = User.find_by(username: credential)
+    end
+
+    if !user
+      return nil
+    else
+      return user.authenticate(password)
+    end
   end
 
   def reset_session_token!
     self.session_token = generate_unique_session_token()
     # self.save!
     return self.session_token
+  end
+
+  def custom_status
+    if self.status == "Custom"
+      self.status = self.custom_status
+    end
+  end
+
+  def online_status=(status)
+    if self.status == "Online"
+      self.status = status
+    end
+  end
+
+  def online_status
+    if self.status == "Online"
+      self.status = self.set_online_status
+    end
+  end
+
+  def set_online_status
+    if self.status == "Online"
+      self.status = "Online"
+    end
   end
 
   private
