@@ -1,5 +1,39 @@
+@font-face {
+  font-family: "gg2 sans";
+  src: url("./assets/fonts/gg2\ sans\ Regular.woff2");
+}
+
+@font-face {
+  font-family: "gg2 sans";
+  src: url("./assets/fonts/gg2\ sans\ Medium.woff2");
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: "gg2 sans";
+  src: url("./assets/fonts/gg2\ sans\ Semibold.woff2");
+  font-weight: 600;
+}
+
+@font-face {
+  font-family: "gg2 sans";
+  src: url("./assets/fonts/gg2\ sans\ Bold.woff2");
+  font-weight: 900;
+}
+
+@font-face {
+  font-family: "gg2 sans";
+  src: url("./assets/fonts/gg2\ sans\ Mediumbold.woff2");
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: "gg2 sans";
+  src: url("./assets/fonts/gg2\ sans\ Regularmedium.woff2");
+  font-weight: 700;
+}
 * {
-  font-family: "gg sans", "Noto Sans", "Helvetica Neue", Helvetica, Arial,
+  font-family: "gg2 sans", "Noto Sans", "Helvetica Neue", Helvetica, Arial,
     sans-serif;
   background-color: inherit;
   z-index: inherit;

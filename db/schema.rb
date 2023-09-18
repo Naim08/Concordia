@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_09_13_195104) do
+ActiveRecord::Schema[7.0].define(version: 2023_09_15_193738) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -42,6 +42,30 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_13_195104) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "memberships", force: :cascade do |t|
+    t.bigint "server_id", null: false
+    t.bigint "member_id", null: false
+    t.string "position", default: "member", null: false
+    t.string "nickname"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["member_id"], name: "index_memberships_on_member_id"
+    t.index ["server_id", "member_id"], name: "index_memberships_on_server_id_and_member_id", unique: true
+    t.index ["server_id"], name: "index_memberships_on_server_id"
+  end
+
+  create_table "servers", force: :cascade do |t|
+    t.string "name", null: false
+    t.bigint "owner_id", null: false
+    t.string "invite_code", null: false
+    t.string "server_photo_url"
+    t.boolean "private", default: false, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "first_channel_id"
+    t.index ["owner_id"], name: "index_servers_on_owner_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "username", null: false
     t.string "password_digest", null: false
@@ -59,4 +83,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_13_195104) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "memberships", "servers"
+  add_foreign_key "memberships", "users", column: "member_id"
+  add_foreign_key "servers", "users", column: "owner_id"
 end

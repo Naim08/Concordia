@@ -85,7 +85,7 @@ const Tile4 = () => {
       <img className="tile4-image" src={tile4} alt="voice channel demo" />
       <div className="tile4-footer">
         <div className="tile4-footer-text">
-          <h3>Get Started!</h3>
+          <h3>Ready to start your journey?</h3>
           <img className="tile4-footer-star" src={star} alt="star" />
           <button className="tile4-footer-button">Sign Up Now</button>
         </div>

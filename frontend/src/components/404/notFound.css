@@ -1,0 +1,42 @@
+.not-found-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100vh;
+  background-color: #ffffff; /* Dark background similar to Discord's theme */
+  padding: 0 10%;
+  font-family: "gg2 sans";
+}
+
+.not-found-text {
+  flex: 1;
+  color: #ffffff; /* White text */
+  padding-right: 5%;
+}
+
+.not-found-text h1 {
+  font-size: 44px;
+  color: #5865f2; /* Discord's iconic purple color */
+  margin-bottom: 1rem;
+  font-weight: 900;
+}
+
+.not-found-text p {
+  font-size: 1.5rem;
+  color: black;
+  font-weight: 400;
+}
+
+.not-found-image {
+  flex: 1;
+  padding-left: 5%;
+}
+
+.not-found-image img {
+  max-width: 100%;
+  height: auto;
+}
+
+.nav-bar-container {
+  background-color: #5865f2;
+}

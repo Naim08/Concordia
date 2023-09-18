@@ -1,0 +1,267 @@
+.server-form {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding-bottom: 16px;
+  width: 440px;
+}
+
+.server-form.left {
+  animation: slide-left 0.3s;
+}
+
+.server-form.right {
+  animation: slide-right 0.3s;
+}
+
+.server-form.join-create {
+  padding-bottom: 0;
+}
+
+.server-form-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 24px 16px 0;
+}
+
+.server-form-header.create {
+  padding: 24px 24px 0;
+}
+
+.server-form-header h1 {
+  color: #060607;
+  font-size: 24px;
+  font-weight: 900;
+}
+
+.server-form-subtext {
+  color: #4e5058;
+  font-size: 16px;
+  margin-top: 8px;
+}
+
+.server-form-subtext.small {
+  font-size: 14px;
+}
+
+.server-form-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  display: inline;
+  color: #a6a7ab;
+  transition: color 0.2s ease-out;
+  padding: 4px;
+}
+
+.server-form-close:hover {
+  color: #080809;
+  cursor: pointer;
+  transition: color 0.2s ease-in;
+}
+
+.choice-container {
+  display: flex;
+  align-items: center;
+  min-height: 66px;
+  width: 80%;
+  border: 1px solid #e8e9eb;
+  border-radius: 8px;
+  margin-bottom: 8px;
+  margin-top: 16px;
+}
+
+.choice-container:hover {
+  background: #eaebed;
+  cursor: pointer;
+}
+
+.choice-icon {
+  margin: 8px 8px 8px 16px;
+  max-width: 48px;
+  min-width: 48px;
+  max-height: 48px;
+  min-height: 48px;
+}
+
+.choice-text {
+  font-size: 16px;
+  font-weight: 900;
+  color: #313338;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  flex-basis: 100%;
+}
+
+.choice-arrow {
+  flex-basis: 100%;
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  margin-right: 16px;
+}
+
+.choice-arrow img {
+  height: 20px;
+  width: 20px;
+}
+
+.server-form-input-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: baseline;
+  padding: 16px;
+  width: calc(100% - 32px);
+}
+
+.server-form-image-container {
+  color: #4e5058;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding-top: 4px;
+}
+
+.server-form-image-icon-container {
+  position: relative;
+}
+
+.server-form-name-container {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: start;
+  margin-top: 24px;
+}
+
+.server-form-image-input {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  font-size: 0px;
+  cursor: not-allowed;
+  margin: 0;
+  padding: 0;
+  border: none;
+  border-radius: 0;
+  background: none;
+}
+
+.server-form-image-preview {
+  width: 80px;
+  height: 80px;
+  border-radius: 100%;
+}
+
+.input-label {
+  margin-bottom: 8px;
+  color: #4e5058;
+  font-weight: bold;
+  font-size: 12px;
+}
+
+.input-label.error {
+  color: #fa777c;
+}
+
+.input-label.bold {
+  font-weight: 900;
+}
+
+.server-form-input {
+  background: #e3e5e8;
+  padding: 10px;
+  width: calc(100% - 20px);
+  color: #35373c;
+  margin-bottom: 15px;
+}
+
+.server-form-error {
+  color: #fa777c;
+  font-size: 14px;
+}
+
+.helper-text {
+  font-size: 14px;
+  color: #060607;
+  margin-bottom: 5px;
+}
+
+.helper-text.small {
+  font-size: 12px;
+}
+
+.server-form-footer {
+  width: calc(100% - 32px);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #f2f3f5;
+  padding: 16px;
+  border-bottom-right-radius: 8px;
+  border-bottom-left-radius: 8px;
+}
+
+.back-link {
+  color: #80848e;
+  font-size: 14px;
+  font-weight: bold;
+  padding: 2px 4px;
+  height: 38px;
+  width: 38px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.back-link:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.back-link.create {
+  color: #000000;
+}
+
+.back-link.create:hover {
+  text-decoration: none;
+}
+
+.server-form-submit {
+  margin: 0;
+  font-size: 14px;
+}
+
+.server-form-submit:hover {
+  margin: 0;
+  font-size: 14px;
+}
+
+@keyframes slide-left {
+  0% {
+    left: -500px;
+  }
+  100% {
+    left: 0;
+  }
+}
+
+@keyframes slide-right {
+  0% {
+    right: -500px;
+  }
+  100% {
+    right: 0;
+  }
+}

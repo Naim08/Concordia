@@ -44,6 +44,18 @@ class User < ApplicationRecord
 
   has_one_attached :photo
 
+  has_many :memberships,
+    inverse_of: :member,
+    foreign_key: :member_id,
+    dependent: :destroy
+
+  has_many :servers,
+    inverse_of: :owner,
+    foreign_key: :owner_id,
+    dependent: :destroy
+
+  has_many :server_memberships, through: :memberships, source: :server
+
   def self.find_by_credentials(credential, password)
     email_regex = URI::MailTo::EMAIL_REGEXP
     if (email_regex.match(credential))

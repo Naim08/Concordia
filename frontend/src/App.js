@@ -1,12 +1,15 @@
 import { useSelector, useDispatch } from "react-redux";
 import "./app.css";
 
-import { useState, useContext, useEffect } from "react";
 import SignUpForm from "./components/signup";
-import { fetchUser } from "./store/user";
 import LoginForm from "./components/login";
 import { Routes, Route } from "react-router-dom";
 import Splash from "./components/splash";
+import AuthRoute from "./components/auth/authRoute";
+import ProtectedRoute from "./components/auth/protectedRoute";
+import HomePage from "./components/home";
+import ServerIndex from "./components/server";
+import NotFound from "./components/404/notFound";
 
 function App() {
   return (
@@ -14,8 +17,19 @@ function App() {
       <Routes>
         <Route path="/" element={<Splash />} />
 
-        <Route path="/signup" element={<SignUpForm />} />
-        <Route path="/login" element={<LoginForm />} />
+        <Route path="/" element={<AuthRoute />}>
+          <Route path="signup" element={<SignUpForm />} />
+          <Route path="login" element={<LoginForm />} />
+        </Route>
+
+        <Route path="/home" element={<ProtectedRoute />}>
+          <Route index element={<HomePage />} />
+        </Route>
+
+        <Route path="/servers" element={<ProtectedRoute />}>
+          <Route index element={<ServerIndex />} />
+        </Route>
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </div>
   );
