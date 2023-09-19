@@ -81,6 +81,4 @@ test:
 #
 production:
   <<: *default
-  database: discordclone_production
-  username: discordclone
-  password: <%= ENV["DISCORDCLONE_DATABASE_PASSWORD"] %>
+  url: <%= ENV['DATABASE_URL'] %>

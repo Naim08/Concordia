@@ -1,0 +1,17 @@
+{
+  "name": "Concordia",
+  "version": "1.0.0",
+  "description": "This is the backend for a Discord clone built with Ruby on Rails. It provides a RESTful API for the frontend to interact with.",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "build": "npm install --prefix frontend && npm run build --prefix frontend"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "engines": {
+    "node": "18.17.x"
+  }
+}
