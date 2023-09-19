@@ -77,32 +77,6 @@ class User < ApplicationRecord
     return self.session_token
   end
 
-  def custom_status
-    if self.custom_status == ""
-      self.custom_status = nil
-    end
-  end
-
-  def online_status=(status)
-    if STATUS.include?(status)
-      self.status = status
-    end
-  end
-
-  def set_online_status=(status)
-    if STATUS.include?(status)
-      self.online_status = status
-    end
-  end
-
-  def online_status
-    self.online_status ||= "Offline"
-  end
-
-  def set_online_status
-    self.set_online_status ||= "Online"
-  end
-
   private
 
   def generate_unique_session_token
