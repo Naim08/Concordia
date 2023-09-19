@@ -1,11 +1,22 @@
 import { useSelector } from "react-redux";
-import { Navigate, Outlet } from "react-router-dom";
+import { Navigate, Outlet, useLocation, useNavigate } from "react-router-dom";
 import { getCurrentUser } from "../../store/session";
+import { useEffect } from "react";
 
 const AuthRoute = () => {
   const currentUser = useSelector(getCurrentUser);
+  const location = useLocation();
+  const navigate = useNavigate();
 
-  if (currentUser) return <Navigate to="/home" />;
+  useEffect(() => {
+    if (currentUser) {
+      location.state ? navigate(location.state.from) : navigate("/home");
+    }
+  }, [currentUser]);
+
+  if (currentUser) {
+    return <Navigate to="/home" />;
+  }
 
   return <Outlet />;
 };

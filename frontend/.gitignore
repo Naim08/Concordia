@@ -22,3 +22,6 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+src/assets/fontawesome/svgs
+/src/assets/fontawesome/webfonts
+/src/assets/fontawesome/metadata

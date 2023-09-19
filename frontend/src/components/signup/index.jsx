@@ -4,7 +4,7 @@ import { Link, Navigate } from "react-router-dom";
 import "./signup.css";
 import { getErrors, removeErrors } from "../../store/errors";
 import { getCurrentUser, signup } from "../../store/session";
-import ModalBackground from "../modalbackground";
+import { ModalBackground } from "../modal/modal";
 
 // const SignUpForm = (props) => {
 //   const [username, setUsername] = useState("");

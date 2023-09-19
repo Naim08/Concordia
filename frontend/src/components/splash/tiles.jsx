@@ -6,17 +6,18 @@ import channels from "../../assets/channels.svg";
 import voice_channel from "../../assets/voice_channel.svg";
 import tile4 from "../../assets/tile4.svg";
 import star from "../../assets/star.svg";
+import kickingShoes from "../../assets/kicking_shoes.svg";
 
 const Tile1 = () => {
   return (
-    <div className="tile1-holder">
+    <div className="tile1-holder tile-container">
       <img
         src={backgroundImg}
         className="tile1-background1"
         alt="mountains-background"
       />
       <div className="tile1-text">
-        <h3>IMAGINE A PLACE...</h3>
+        <h1>IMAGINE A PLACE...</h1>
         <p>
           ...where you can find friends for a gaming group, join a small,
           disorganized juggling cult, or be part of a worldwide coding
@@ -25,7 +26,11 @@ const Tile1 = () => {
         </p>
       </div>
 
-      <img src={shoes} className="tile1-shoes" alt="characters-in-shoes" />
+      <img
+        src={kickingShoes}
+        className="tile1-shoes"
+        alt="characters-in-shoes"
+      />
       <img
         src={sipping}
         className="tile1-sipping"
@@ -37,7 +42,7 @@ const Tile1 = () => {
 
 const Tile2 = () => {
   return (
-    <div className="tile2-holder">
+    <div className="tile2-holder tile-container">
       <img className="tile2-image" src={channels} alt="channel demo" />
       <div className="tile2-text">
         <h3>Create a place where you belong</h3>
@@ -53,7 +58,7 @@ const Tile2 = () => {
 
 const Tile3 = () => {
   return (
-    <div className="tile3-holder">
+    <div className="tile3-holder tile-container">
       <div className="tile3-text">
         <h3>Where live chat happens with WebSockets</h3>
         <p>
@@ -72,7 +77,7 @@ const Tile3 = () => {
 
 const Tile4 = () => {
   return (
-    <div className="tile4-holder">
+    <div className="tile4-holder tile-container">
       <div className="tile4-text">
         <h3>RELIABLE TECH FOR STAYING CLOSE</h3>
         <p>

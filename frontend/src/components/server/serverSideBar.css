@@ -1,0 +1,167 @@
+.server-bar {
+  min-width: 72px;
+  max-width: 72px;
+  height: calc(100vh - 12px);
+  height: calc(100svh - 12px);
+  background-color: #1e1f22;
+
+  overflow: hidden scroll;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 12px;
+}
+
+.server-bar::-webkit-scrollbar {
+  display: none;
+}
+
+.server-item-wrapper {
+  width: 72px;
+  min-height: 48px;
+  max-height: 48px;
+  margin-bottom: 8px;
+  display: flex;
+  justify-content: center;
+  flex-direction: row-reverse;
+  position: relative;
+}
+
+.server-icon-wrapper,
+.server-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 100%;
+  transition: border-radius 0.3s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.server-icon-wrapper:hover,
+.server-icon:hover {
+  border-radius: 16px;
+  transition: border-radius 0.3s;
+}
+
+.server-item-wrapper.selected .server-icon {
+  border-radius: 16px;
+}
+
+.server-icon {
+  height: 48px;
+  width: 48px;
+}
+
+.home-icon-wrapper {
+  background-color: #313338;
+  color: #dbdee1;
+}
+
+.server-item-wrapper.selected .home-icon-wrapper {
+  background-color: #5865f2;
+  color: #ffffff;
+  border-radius: 16px;
+}
+
+.home-icon-wrapper:hover {
+  background-color: #5865f2;
+  color: #ffffff;
+  transition: background-color 0.1s ease-out, color 0.1s ease-out,
+    border-radius 0.3s;
+  cursor: pointer;
+}
+
+.home-icon {
+  height: 28px;
+  width: 28px;
+  content: url("../../assets/capycord_icons/icon_inactive.png");
+}
+
+.server-item-wrapper.selected .home-icon {
+  content: url("../../assets/capycord_icons/icon.png");
+}
+
+.home-icon-wrapper:hover .home-icon {
+  content: url("../../assets/capycord_icons/icon.png");
+}
+
+.add-server-icon-wrapper {
+  background-color: #313338;
+  color: #23a559;
+}
+
+.server-item-wrapper.selected .add-server-icon-wrapper {
+  background-color: #23a559;
+  color: #ffffff;
+  border-radius: 16px;
+}
+
+.add-server-icon-wrapper:hover {
+  background-color: #23a559;
+  color: #ffffff;
+  transition: background-color 0.1s ease-out, color 0.1s ease-out,
+    border-radius 0.3s;
+  cursor: pointer;
+}
+
+.server-item-wrapper.selected,
+.server-item-wrapper.selected:hover {
+  background: none;
+}
+
+.server-divider {
+  min-height: 2px;
+  width: 32px;
+  border-radius: 1px;
+  background-color: #35363c;
+  margin-bottom: 8px;
+}
+
+.tab-selector-wrapper {
+  position: absolute;
+  left: 0;
+  min-height: 48px;
+  min-width: 8px;
+  display: flex;
+  align-items: center;
+}
+
+.tab-selector {
+  background: #f2f3f5;
+  margin-left: -4px;
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
+  min-width: 0px;
+  min-height: 0px;
+
+  transition: min-height 0.2s ease-out, min-width 0.2s ease-out;
+}
+
+.server-icon-wrapper:hover {
+  cursor: pointer;
+}
+
+.server-icon-wrapper:hover ~ .tab-selector-wrapper > .tab-selector {
+  min-width: 8px;
+  min-height: 20px;
+  transition: min-height 0.2s ease-in, min-width 0.2s ease-in;
+}
+
+.server-item-wrapper.selected:hover .tab-selector {
+  min-width: 8px;
+  min-height: 40px;
+}
+
+.server-item-wrapper.selected .tab-selector {
+  min-width: 8px;
+  min-height: 40px;
+  transition: min-height 0.2s ease-in, min-width 0.2s ease-in;
+}
+
+.server-icon.filler {
+  background: #313338;
+}

@@ -1,13 +1,19 @@
 import React, { useContext, useRef, useState, useEffect } from "react";
 import ReactDOM from "react-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { setServerFormSlide, getServerSlide } from "../../store/ui";
+import {
+  setServerFormSlide,
+  getServerSlide,
+  getBackgroundState,
+} from "../../store/ui";
+import modalbackground from "../../assets/LoginBackground.png";
 import "./modal.css";
 
 const ModalContext = React.createContext();
 
 export function ServerFormModal({ onClose, children }) {
   const slide = useSelector(getServerSlide);
+  const showBackground = useSelector(getBackgroundState);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -29,6 +35,7 @@ export function ServerFormModal({ onClose, children }) {
 
   return ReactDOM.createPortal(
     <div className="modal-form">
+      {showBackground && <ModalBackground />}
       <div className="modal-form-background" onClick={onClose} />
       <div
         className={`modal-content ${
@@ -55,5 +62,63 @@ export function ModalProvider({ children }) {
       <ModalContext.Provider value={value}>{children}</ModalContext.Provider>
       <div ref={modalRef} />
     </>
+  );
+}
+
+export const DropdownModal = ({ onClose, children }) => {
+  useEffect(() => {
+    const escListener = (e) => {
+      if (e.key === "Escape") onClose();
+    };
+
+    const clickListener = (e) => {
+      if (e.target.closest(".server-settings-dropdown")) return;
+      else if (e.target.closest(".server-settings") === null) onClose();
+    };
+
+    document.addEventListener("keydown", escListener);
+    document.addEventListener("mousedown", clickListener);
+    return () => {
+      document.removeEventListener("keydown", escListener);
+      document.removeEventListener("mousedown", clickListener);
+    };
+  }, []);
+
+  const modalNode = useContext(ModalContext);
+  if (!modalNode) return null;
+
+  return ReactDOM.createPortal(
+    <div className="dropdown-modal">
+      <div className="dropdown-modal-background" onClick={onClose} />
+      <div className="dropdown-modal-content">{children}</div>
+    </div>,
+    modalNode
+  );
+};
+
+export const ModalBackground = () => {
+  return (
+    <img
+      className="modal-background"
+      src={modalbackground}
+      alt="screen-background"
+    />
+  );
+};
+
+export function ServerToolTip({ top, left = 0, onClose, children }) {
+  const modalNode = useContext(ModalContext);
+  if (!modalNode) return null;
+
+  return ReactDOM.createPortal(
+    <div
+      className="server-tooltip"
+      onMouseLeave={onClose}
+      style={{ top: top, left: left }}
+    >
+      {children}
+      <div className="server-tooltip-pointer"></div>
+    </div>,
+    modalNode
   );
 }

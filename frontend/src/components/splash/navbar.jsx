@@ -3,6 +3,7 @@ import LogoComponent from "../logo";
 import "./navbar.css";
 import { useDispatch, useSelector } from "react-redux";
 import { logout, getCurrentUser } from "../../store/session";
+
 const NavBar = () => {
   const dispatch = useDispatch();
   const currentUser = useSelector(getCurrentUser);

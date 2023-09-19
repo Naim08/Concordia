@@ -9,6 +9,7 @@ import AuthRoute from "./components/auth/authRoute";
 import ProtectedRoute from "./components/auth/protectedRoute";
 import HomePage from "./components/home";
 import ServerIndex from "./components/server";
+import ServerSideBar from "./components/server/serverSideBar";
 import NotFound from "./components/404/notFound";
 
 function App() {
@@ -27,7 +28,8 @@ function App() {
         </Route>
 
         <Route path="/servers" element={<ProtectedRoute />}>
-          <Route index element={<ServerIndex />} />
+          <Route index element={<ServerSideBar />} />
+          <Route path=":serverId" element={<ServerSideBar />} />
         </Route>
         <Route path="*" element={<NotFound />} />
       </Routes>

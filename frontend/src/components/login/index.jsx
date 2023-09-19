@@ -1,14 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, Navigate } from "react-router-dom";
+import { Link, Navigate, useNavigate, useLocation } from "react-router-dom";
 import { login, getCurrentUser } from "../../store/session";
 import { getErrorStatus, getErrors, removeErrors } from "../../store/errors";
 import "./login.css";
-import ModalBackground from "../modalbackground";
+import { ModalBackground } from "../modal/modal";
 import { getUnauthorized, setUnauthorized } from "../../store/ui";
 
 const LoginForm = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const location = useLocation();
 
   const sessionUser = useSelector(getCurrentUser);
   const errors = useSelector(getErrors);
@@ -38,11 +40,9 @@ const LoginForm = () => {
     if (errors) dispatch(removeErrors());
     if (unauthorized) dispatch(setUnauthorized(false));
 
-    const credential = user === 1 ? "naim08@gmail.com" : "naim02@gmail.com";
-    dispatch(login({ credential, password: "password123" }));
+    const credential = user === 1 ? "mmiah0890@gmail.com" : "naim02@gmail.com";
+    dispatch(login({ credential, password: "password" }));
   };
-
-  if (sessionUser) return <Navigate to="/home" />;
 
   return (
     <div className="form-wrapper">
@@ -53,7 +53,9 @@ const LoginForm = () => {
             Must be logged in or logged in elsewhere.
           </span>
         ) : null}
-
+        <p>
+          <i className="fa-solid fa-coffee fa-2xs"></i>{" "}
+        </p>
         <form className="login-signup" onSubmit={handleSubmit}>
           <div className="form-header">
             <h1>Welcome back!</h1>

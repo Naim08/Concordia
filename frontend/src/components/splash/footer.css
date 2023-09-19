@@ -4,7 +4,6 @@
   display: flex;
   justify-content: center;
   position: relative;
-  font-family: "Noto Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 .splashfooter-holder > * {
@@ -30,6 +29,7 @@
   color: #5865f2;
   font-size: 16px;
   cursor: default;
+  font-weight: 800;
 }
 
 .splashfooter-linkholder > ul {

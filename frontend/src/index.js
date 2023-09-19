@@ -9,6 +9,8 @@ import * as sessionActions from "./store/session";
 import csrfFetch from "./store/csrf";
 import * as serversReducer from "./store/server";
 import { ModalProvider } from "./components/modal/modal";
+import "./assets/fontawesome/css/all.min.css";
+import "./assets/fontawesome/js/all.min.js";
 
 const store = configureStore();
 

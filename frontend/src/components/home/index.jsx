@@ -1,9 +1,39 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-
-import { Navigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
+import { getCurrentUser } from "../../store/session";
+import {
+  getSelectedServer,
+  getHomeRedirect,
+  setAnimateOfflineFriends,
+  setHomeRedirect,
+  setSelectedServer,
+} from "../../store/ui";
+import myConsumer from "../../consumer";
+import { fetchServers, getServers } from "../../store/server";
 
 const HomePage = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const currentUser = useSelector(getCurrentUser);
+  const getHomeRedirectState = useSelector(getHomeRedirect);
+
+  useEffect(() => {
+    if (getHomeRedirectState) {
+      dispatch(setHomeRedirect(false));
+      location.state ? navigate(location.state.from) : navigate("/");
+    }
+  }, [getHomeRedirectState]);
+
+  useEffect(() => {
+    if (currentUser) {
+      dispatch(setSelectedServer("home"));
+      dispatch(fetchServers());
+    }
+  }, [dispatch]);
+
   return (
     <div className="home-page">
       <h1>Home Page</h1>

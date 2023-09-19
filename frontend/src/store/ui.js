@@ -16,6 +16,7 @@ const SET_CREATE_CHANNEL_MODAL = "ui/setCreateChannelModal";
 const SET_SERVER_FORM_PAGE = "ui/setServerFormPage";
 const SET_SERVER_FORM_SLIDE = "ui/setServerFormSlide";
 const SET_SERVER_ADMIN_TAB = "ui/setSelectedServerAdminTab";
+const SET_BACKGROUND = "ui/setBackground";
 
 // forms and feedback
 
@@ -155,6 +156,10 @@ export const setQuickDelete = (toggle) => ({
   toggle,
 });
 
+export const setBackground = (toggle) => ({
+  type: SET_BACKGROUND,
+  toggle,
+});
 export const getUnauthorized = (state) => {
   return state.ui.auth.unauthorized;
 };
@@ -235,6 +240,10 @@ export const getCreateChannelModal = (state) => {
   return state.ui.modal.showCreateChannelModal;
 };
 
+export const getBackgroundState = (state) => {
+  return state.ui.modal.background;
+};
+
 export const getDeletedServerId = (state) => {
   return state.ui.editDelete.deletedServerId;
 };
@@ -293,6 +302,7 @@ const modalInitialState = {
   serverAdminTab: "Overview",
   showLeaveServerModal: false,
   showCreateChannelModal: false,
+  background: false,
 };
 
 const modalUiReducer = (state = modalInitialState, action) => {
@@ -314,6 +324,8 @@ const modalUiReducer = (state = modalInitialState, action) => {
       return { ...state, showLeaveServerModal: action.toggle };
     case SET_CREATE_CHANNEL_MODAL:
       return { ...state, showCreateChannelModal: action.toggle };
+    case SET_BACKGROUND:
+      return { ...state, background: action.toggle };
     default:
       return state;
   }

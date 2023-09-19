@@ -1,0 +1,23 @@
+a,
+button,
+.navbar-login,
+.footer-signup {
+  transition: all 0.3s ease;
+}
+
+h1,
+h2,
+h3 {
+  font-weight: 900; /* Bold */
+}
+
+p,
+a,
+button {
+  font-weight: 400; /* Regular */
+}
+
+button {
+  transform: scale(1.05);
+  transition: transform 0.2s;
+}

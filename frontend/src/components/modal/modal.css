@@ -28,6 +28,17 @@
   border-style: solid;
   border-color: transparent black transparent transparent;
 }
+.server-tooltip-pointer {
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 5px solid #333;
+  bottom: -5px;
+  left: 50%;
+  transform: translateX(-50%);
+}
 
 .action-tooltip {
   position: fixed;
@@ -257,4 +268,13 @@
     opacity: 0;
     scale: 1.2;
   }
+}
+
+.modal-background {
+  position: absolute;
+  /* scale: 85%; */
+  /* top: -96px;
+    left: -120px; */
+  min-width: 100vw;
+  min-height: 100vh;
 }

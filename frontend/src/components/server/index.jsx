@@ -6,7 +6,7 @@ import {
 } from "../../store/ui";
 import CreateServerForm from "./createServer";
 import { useDispatch } from "react-redux";
-const ServerIndex = () => {
+const ServerForm = () => {
   const dispatch = useDispatch();
   const closeForm = () => {
     const serverFormModal = document.querySelector(".modal-content");
@@ -28,4 +28,4 @@ const ServerIndex = () => {
   );
 };
 
-export default ServerIndex;
+export default ServerForm;
