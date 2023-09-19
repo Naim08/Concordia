@@ -13,5 +13,8 @@
   "license": "ISC",
   "engines": {
     "node": "18.17.x"
+  },
+  "dependencies": {
+    "reselect": "^4.1.8"
   }
 }

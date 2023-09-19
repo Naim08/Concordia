@@ -25,7 +25,8 @@ import {
 import { ServerFormModal, ServerToolTip } from "../modal/modal";
 import CreateServerForm from "./createServer";
 import ServerIndexList from "./serverIndexList";
-import homeIcon from "../../assets/discord_logo.png";
+import "./serverSideBar.css";
+import consumer from "../../consumer";
 
 const ServerSideBar = () => {
   const dispatch = useDispatch();
@@ -45,6 +46,7 @@ const ServerSideBar = () => {
 
   useEffect(() => {
     dispatch(fetchServers());
+
     return () => {
       dispatch(resetServers());
     };
@@ -70,6 +72,43 @@ const ServerSideBar = () => {
     if (serverId) {
       dispatch(setSelectedServer(serverId));
     }
+    const subscription = consumer.subscriptions.create(
+      { channel: "ServersChannel", id: serverId },
+      {
+        received: ({ type, member, channel, id }) => {
+          switch (type) {
+            case "UPDATE_MEMBER":
+              dispatch(addMember(member));
+              break;
+            case "DELETE_MEMBER":
+              dispatch(removeMember(id));
+              dispatch(removeUserMessages(id));
+              break;
+            case "ADD_MEMBER":
+              dispatch(addMember(member));
+              break;
+            case "ADD_CHANNEL":
+              dispatch(addChannel(channel));
+              break;
+            case "DELETE_CHANNEL":
+              dispatch(removeChannel(id));
+              dispatch(setDeletedChannelId(id));
+              break;
+            case "UPDATE_CHANNEL":
+              dispatch(addChannel(channel));
+              break;
+            default:
+            // console.log("unknown broadcast type");
+          }
+        },
+      }
+    );
+
+    return () => {
+      subscription?.unsubscribe();
+      // dispatch(resetChannels());
+      //   dispatch(resetMembers());
+    };
   }, [serverId]);
   const toggleSelected = (e) => {
     if (e.target.dataset.key) {
@@ -138,7 +177,7 @@ const ServerSideBar = () => {
           onMouseLeave={leaveHandler}
           onWheel={leaveHandler}
         >
-          <img data-key="home" className="home-icon" src={homeIcon} alt="" />
+          <i className="fa-brands fa-discord fa-beat fa-lg"></i>
         </div>
         <div className="tab-selector-wrapper">
           <span className="tab-selector" />

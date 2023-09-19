@@ -106,16 +106,12 @@ export const ModalBackground = () => {
   );
 };
 
-export function ServerToolTip({ top, left = 0, onClose, children }) {
+export function ServerToolTip({ top, onClose, children }) {
   const modalNode = useContext(ModalContext);
   if (!modalNode) return null;
 
   return ReactDOM.createPortal(
-    <div
-      className="server-tooltip"
-      onMouseLeave={onClose}
-      style={{ top: top, left: left }}
-    >
+    <div className="server-tooltip" onMouseLeave={onClose} style={{ top: top }}>
       {children}
       <div className="server-tooltip-pointer"></div>
     </div>,

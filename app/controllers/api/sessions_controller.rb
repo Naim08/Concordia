@@ -16,6 +16,14 @@ class Api::SessionsController < ApplicationController
 
     if @user
       login!(@user)
+
+      @user.memberships.includes(:server).each do |membership|
+        ServersChannel.broadcast_to(
+          membership.server,
+          type: "UPDATE_MEMBER",
+          **from_template("api/memberships/show", membership: membership),
+        )
+      end
       render "api/users/show"
     else
       render json: { errors: { login: ["Login or password is invalid."] } }, status: :unauthorized

@@ -11,6 +11,7 @@ import {
 } from "../../store/ui";
 import myConsumer from "../../consumer";
 import { fetchServers, getServers } from "../../store/server";
+import styled from "styled-components";
 
 const HomePage = () => {
   const dispatch = useDispatch();
@@ -36,6 +37,10 @@ const HomePage = () => {
 
   return (
     <div className="home-page">
+      <i
+        className="fa-brands fa-discord fa-beat fa-lg"
+        style={{ color: "#5765f2" }}
+      ></i>
       <h1>Home Page</h1>
     </div>
   );

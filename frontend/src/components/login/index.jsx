@@ -54,7 +54,7 @@ const LoginForm = () => {
           </span>
         ) : null}
         <p>
-          <i className="fa-solid fa-coffee fa-2xs"></i>{" "}
+          <i className="fa-brands fa-discord fa-beat fa-lg"></i>
         </p>
         <form className="login-signup" onSubmit={handleSubmit}>
           <div className="form-header">

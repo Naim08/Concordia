@@ -74,21 +74,29 @@
     border-radius 0.3s;
   cursor: pointer;
 }
+.home-icon:before {
+  content: 'e32e';
+}
 
 .home-icon {
   height: 28px;
   width: 28px;
-  content: url("../../assets/capycord_icons/icon_inactive.png");
+  font-family: "Font Awesome 6 Pro";
 }
 
 .server-item-wrapper.selected .home-icon {
-  content: url("../../assets/capycord_icons/icon.png");
+   font-family: "Font Awesome 6 Pro";
+}
+.server-item-wrapper.selected .home-icon:before {
+  content: 'e32e';
 }
 
 .home-icon-wrapper:hover .home-icon {
-  content: url("../../assets/capycord_icons/icon.png");
+  font-family: "Font Awesome 6 Pro";
 }
-
+.home-icon-wrapper:hover .home-icon:before {
+  content: 'e32e';
+}
 .add-server-icon-wrapper {
   background-color: #313338;
   color: #23a559;

@@ -2,7 +2,9 @@ import csrfFetch from "./csrf";
 import { unauthorizedSession } from "./session";
 import { addErrors } from "./errors";
 import { setNewServer } from "./ui";
+import { createSelector } from "reselect";
 
+const serversObjectSelector = (state) => state.entities.servers;
 const RESET_SERVERS = "servers/resetServers";
 const SET_SERVERS = "servers/setServers";
 const ADD_SERVER = "servers/addServer";
@@ -27,12 +29,13 @@ export const removeServer = (serverId) => ({
   serverId,
 });
 
-export const getServers = (state) => {
-  return state.entities.servers ? Object.values(state.servers) : [];
-};
+export const getServers = createSelector(
+  [serversObjectSelector],
+  (serversObject) => (serversObject ? Object.values(serversObject) : [])
+);
 
 export const getServer = (serverId) => (state) => {
-  return state.entities.servers ? state.servers[serverId] : null;
+  return state.entities.servers ? state.entities.servers[serverId] : null;
 };
 
 export const fetchServers = () => async (dispatch) => {

@@ -1,6 +1,6 @@
 class Api::ServersController < ApplicationController
   before_action :require_logged_in, only: [:index, :show, :create, :update, :destroy]
-  wrap_parameters include: Server.attribute_names + [:photo]
+  wrap_parameters include: Server.attribute_names + [:photo], format: :multipart_form
 
   def index
     @servers = current_user.server_memberships
@@ -21,6 +21,7 @@ class Api::ServersController < ApplicationController
 
   def show
     @server = Server.find(params[:id])
+
     render :show
   end
 
