@@ -43,7 +43,7 @@ class User < ApplicationRecord
     inclusion: { in: STATUS[1..-1], message: "'%{value}' is not a valid status" }
 
   has_one_attached :photo
-
+  attr_accessor :status
   has_many :memberships,
     inverse_of: :member,
     foreign_key: :member_id,
@@ -78,27 +78,29 @@ class User < ApplicationRecord
   end
 
   def custom_status
-    if self.status == "Custom"
-      self.status = self.custom_status
+    if self.custom_status == ""
+      self.custom_status = nil
     end
   end
 
   def online_status=(status)
-    if self.status == "Online"
+    if STATUS.include?(status)
       self.status = status
     end
   end
 
-  def online_status
-    if self.status == "Online"
-      self.status = self.set_online_status
+  def set_online_status=(status)
+    if STATUS.include?(status)
+      self.online_status = status
     end
   end
 
+  def online_status
+    self.online_status ||= "Offline"
+  end
+
   def set_online_status
-    if self.status == "Online"
-      self.status = "Online"
-    end
+    self.set_online_status ||= "Online"
   end
 
   private

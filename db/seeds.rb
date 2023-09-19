@@ -21,6 +21,7 @@ ApplicationRecord.transaction do
     username: "Demo-lition",
     email: "demo@user.io",
     password: "password",
+    status: "Online",
   )
 
   # More users
