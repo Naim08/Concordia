@@ -1,22 +1,10 @@
 {
   "files": {
-    "main.css": "/static/css/main.e69013dc.css",
-    "main.js": "/static/js/main.d4480a30.js",
+    "main.css": "/static/css/main.4cce4d2a.css",
+    "main.js": "/static/js/main.cd6021b7.js",
     "static/media/404_Page.gif": "/static/media/404_Page.b4ba0790bf44cc4ad631.gif",
-    "static/media/fa-thin-100.ttf": "/static/media/fa-thin-100.881316d6d7081aee5419.ttf",
-    "static/media/fa-duotone-900.ttf": "/static/media/fa-duotone-900.da904eb8d1a121a111b7.ttf",
-    "static/media/fa-light-300.ttf": "/static/media/fa-light-300.2006c9ff100617e95eb8.ttf",
-    "static/media/fa-regular-400.ttf": "/static/media/fa-regular-400.ba0c0a7588d6b4fc8fb7.ttf",
-    "static/media/fa-solid-900.ttf": "/static/media/fa-solid-900.6fa0a8232f0352e4c0f8.ttf",
-    "static/media/fa-thin-100.woff2": "/static/media/fa-thin-100.4bda47dd5caf66e70f60.woff2",
-    "static/media/fa-light-300.woff2": "/static/media/fa-light-300.441b578192c1b1e771cf.woff2",
-    "static/media/fa-duotone-900.woff2": "/static/media/fa-duotone-900.ca0b8a6f1b508d2ecca8.woff2",
-    "static/media/fa-regular-400.woff2": "/static/media/fa-regular-400.e4bb547bebf70ca2cb49.woff2",
-    "static/media/fa-solid-900.woff2": "/static/media/fa-solid-900.2f8c37423114769918de.woff2",
-    "static/media/fa-brands-400.ttf": "/static/media/fa-brands-400.0601cf57e567a5aa17eb.ttf",
     "static/media/LoginBackground.png": "/static/media/LoginBackground.195f501abf1cf8a7f027.png",
     "static/media/voice_channel.svg": "/static/media/voice_channel.540f58e7575886613afd70f641040565.svg",
-    "static/media/fa-brands-400.woff2": "/static/media/fa-brands-400.e24fcc1b7ece401606b1.woff2",
     "static/media/tile4.svg": "/static/media/tile4.b8b2baa7deaa4d684823cc70302f9f85.svg",
     "static/media/gg sans Bold.ttf": "/static/media/gg sans Bold.8c974359b3d8560e22f7.ttf",
     "static/media/gg sans Semibold.ttf": "/static/media/gg sans Semibold.045d974ef95abe31984d.ttf",
@@ -34,16 +22,14 @@
     "static/media/gg2 sans Medium.woff2": "/static/media/gg2 sans Medium.c1b53be672aac192a996.woff2",
     "static/media/discord_logo.png": "/static/media/discord_logo.57f6cbbbcdb8a07821a0.png",
     "static/media/splashbackground1.svg": "/static/media/splashbackground1.cee8c404dad14e615fd4d252741afd11.svg",
-    "static/media/fa-v4compatibility.ttf": "/static/media/fa-v4compatibility.166bb44555a94706e528.ttf",
-    "static/media/fa-v4compatibility.woff2": "/static/media/fa-v4compatibility.2575bf69211b13c08444.woff2",
     "static/media/icons8-discord-128.svg": "/static/media/icons8-discord-128.9ef8c2c2c50012cc2bfd23a9ce9120f4.svg",
     "static/media/star.svg": "/static/media/star.a3f3696d42e79a64b2fc679b6fef9bc4.svg",
     "index.html": "/index.html",
-    "main.e69013dc.css.map": "/static/css/main.e69013dc.css.map",
-    "main.d4480a30.js.map": "/static/js/main.d4480a30.js.map"
+    "main.4cce4d2a.css.map": "/static/css/main.4cce4d2a.css.map",
+    "main.cd6021b7.js.map": "/static/js/main.cd6021b7.js.map"
   },
   "entrypoints": [
-    "static/css/main.e69013dc.css",
-    "static/js/main.d4480a30.js"
+    "static/css/main.4cce4d2a.css",
+    "static/js/main.cd6021b7.js"
   ]
 }

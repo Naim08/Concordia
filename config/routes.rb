@@ -23,9 +23,7 @@ Rails.application.routes.draw do
     resources :memberships, only: [:create, :destroy]
   end
 
-  # Defines the root path route ("/")
-  # root "articles#index"
-
+  mount ActionCable.server => "/cable"
   get "*path", to: "static_pages#frontend_index"
 
   post "api/test", to: "application#test"
