@@ -10,6 +10,7 @@ const SET_SELECTED_SERVER = "ui/setSelectedServer";
 
 // modal
 const SET_SHOW_SERVER_MODAL = "ui/setShowServerModal";
+const SET_JOIN_SERVER_MODAL = "ui/setJoinServerModal";
 const SET_SHOW_SERVER_ADMIN_MODAL = "ui/setShowServerAdminModal";
 const SET_LEAVE_SERVER_MODAL = "ui/setLeaveServerModal";
 const SET_CREATE_CHANNEL_MODAL = "ui/setCreateChannelModal";
@@ -78,6 +79,11 @@ export const setScroll = (toggle) => ({
 
 export const setShowServerModal = (toggle) => ({
   type: SET_SHOW_SERVER_MODAL,
+  toggle,
+});
+
+export const setJoinServerModal = (toggle) => ({
+  type: SET_JOIN_SERVER_MODAL,
   toggle,
 });
 
@@ -192,6 +198,10 @@ export const getShowServerModal = (state) => {
   return state.ui.modal.showServerModal;
 };
 
+export const getJoinServerModal = (state) => {
+  return state.ui.modal.showJoinServerModal;
+};
+
 export const getServerFormType = (state) => {
   return state.ui.modal.serverFormType;
 };
@@ -296,6 +306,7 @@ const navbarUiReducer = (state = navbarInitialState, action) => {
 
 const modalInitialState = {
   showServerModal: false,
+  showJoinServerModal: false,
   serverFormType: "start",
   serverSlide: "expand",
   showServerAdminModal: false,
@@ -312,6 +323,8 @@ const modalUiReducer = (state = modalInitialState, action) => {
       return modalInitialState;
     case SET_SHOW_SERVER_MODAL:
       return { ...state, showServerModal: action.toggle };
+    case SET_JOIN_SERVER_MODAL:
+      return { ...state, showJoinServerModal: action.toggle };
     case SET_SERVER_FORM_PAGE:
       return { ...state, serverFormType: action.formType };
     case SET_SERVER_FORM_SLIDE:

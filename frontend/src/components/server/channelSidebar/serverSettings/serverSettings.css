@@ -1,0 +1,42 @@
+.server-settings {
+  padding: 6px 8px;
+  background: #111214;
+  font-size: 14px;
+  font-weight: 500;
+  color: #b5bac1;
+  min-width: 204px;
+  max-width: 204px;
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+}
+
+.server-setting-option {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6px 8px;
+  margin: 2px 0;
+  border-radius: 4px;
+}
+
+.server-setting-option:hover {
+  background: #4752c4;
+  color: #ffffff;
+  cursor: pointer;
+}
+
+.option-icon {
+  margin-left: 8px;
+  width: 18px;
+  height: 18px;
+}
+
+.server-setting-option.dangerous {
+  color: #f23f42;
+}
+
+.server-setting-option.dangerous:hover {
+  background: #da373c;
+  color: #ffffff;
+}

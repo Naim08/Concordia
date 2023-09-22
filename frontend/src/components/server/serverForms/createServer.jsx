@@ -1,16 +1,16 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getErrors, removeErrors } from "../../store/errors";
+import { getErrors, removeErrors } from "../../../store/errors";
 import {
   getNewServer,
   getServerSlide,
   setServerFormPage,
   setServerFormSlide,
   setShowServerModal,
-} from "../../store/ui";
-import { getCurrentUser } from "../../store/session";
-import { createServer } from "../../store/server";
-import "./server.css";
+} from "../../../store/ui";
+import { getCurrentUser } from "../../../store/session";
+import { createServer } from "../../../store/server";
+
 const CreateServerForm = () => {
   const slide = useSelector(getServerSlide);
   const sessionUser = useSelector(getCurrentUser);

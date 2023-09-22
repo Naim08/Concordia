@@ -2,16 +2,21 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useParams, useNavigate } from "react-router-dom";
 import {
+  getDeletedChannelId,
   getDeletedServerId,
+  getNewChannel,
   getNewServer,
   getSelectedServer,
   getShowServerModal,
+  setDeletedChannelId,
   setDeletedServerId,
+  setNewChannel,
   setNewServer,
   setServerFormPage,
   setServerFormSlide,
   setShowServerModal,
-  setSelectedServer,
+  setJoinServerModal,
+  getJoinServerModal,
 } from "../../store/ui";
 
 import {
@@ -23,7 +28,7 @@ import {
 } from "../../store/server";
 
 import { ServerFormModal, ServerToolTip } from "../modal/modal";
-import CreateServerForm from "./createServer";
+import ServerForms from "./serverForms";
 import ServerIndexList from "./serverIndexList";
 import "./serverSideBar.css";
 import consumer from "../../consumer";
@@ -31,71 +36,40 @@ import consumer from "../../consumer";
 const ServerSideBar = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { serverId } = useParams();
-  const selectedServer = useSelector(getSelectedServer);
-  const selectedServers = useSelector(getServers);
+
+  const { serverId, channelId } = useParams();
+  const selected = useSelector(getSelectedServer);
+  const servers = useSelector(getServers);
 
   const [showModal, setShowModal] = useState(false);
   const [top, setTop] = useState(0);
-
-  const showServerModal = useSelector(getShowServerModal);
   const [currentModal, setCurrentModal] = useState(null);
-
-  const newServer = useSelector(getNewServer);
+  const newServerId = useSelector(getNewServer);
+  const newChannelId = useSelector(getNewChannel);
   const deletedServerId = useSelector(getDeletedServerId);
+  const deletedChannelId = useSelector(getDeletedChannelId);
+  const showServerFormModal = useSelector(getShowServerModal);
+  const showJoinServerModal = useSelector(getJoinServerModal);
+  const iconColor =
+    (showModal && currentModal === "join-server") || showJoinServerModal
+      ? "#ffffff"
+      : "#299e1a";
 
   useEffect(() => {
     dispatch(fetchServers());
 
-    return () => {
-      dispatch(resetServers());
-    };
-  }, [dispatch]);
-
-  useEffect(() => {
-    if (newServer) {
-      navigate(`servers/${newServer}`);
-      dispatch(setNewServer(false));
-    }
-  }, [newServer]);
-
-  useEffect(() => {
-    if (deletedServerId) {
-      if (parseInt(serverId) === deletedServerId) {
-        navigate("/home");
-      }
-      dispatch(setDeletedServerId(null));
-    }
-  }, [deletedServerId]);
-
-  useEffect(() => {
-    if (serverId) {
-      dispatch(setSelectedServer(serverId));
-    }
     const subscription = consumer.subscriptions.create(
-      { channel: "ServersChannel", id: serverId },
+      { channel: "UsersChannel" },
       {
-        received: ({ type, member, channel, id }) => {
+        received: ({ type, server, id }) => {
           switch (type) {
-            case "UPDATE_MEMBER":
-              dispatch(addMember(member));
+            // add direct message notifications here later
+            case "UPDATE_SERVER":
+              dispatch(addServer(server));
               break;
-            case "DELETE_MEMBER":
-              dispatch(removeMember(id));
-              dispatch(removeUserMessages(id));
-              break;
-            case "ADD_MEMBER":
-              dispatch(addMember(member));
-              break;
-            case "ADD_CHANNEL":
-              dispatch(addChannel(channel));
-              break;
-            case "DELETE_CHANNEL":
-              dispatch(removeChannel(id));
-              dispatch(setDeletedChannelId(id));
-              break;
-            case "UPDATE_CHANNEL":
-              dispatch(addChannel(channel));
+            case "DELETE_SERVER":
+              dispatch(removeServer(id));
+              dispatch(setDeletedServerId(id));
               break;
             default:
             // console.log("unknown broadcast type");
@@ -106,10 +80,39 @@ const ServerSideBar = () => {
 
     return () => {
       subscription?.unsubscribe();
-      // dispatch(resetChannels());
-      //   dispatch(resetMembers());
+      dispatch(resetServers());
     };
-  }, [serverId]);
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (newServerId) {
+      navigate(`/server/${newServerId}`);
+      dispatch(setNewServer(null));
+    }
+  }, [newServerId]);
+
+  useEffect(() => {
+    if (newChannelId) {
+      navigate(`/server/${serverId}/${newChannelId}`);
+      dispatch(setNewChannel(null));
+    }
+  }, [newChannelId]);
+
+  useEffect(() => {
+    if (deletedServerId) {
+      if (serverId === deletedServerId.toString()) navigate("/home");
+      dispatch(setDeletedServerId(null));
+    }
+  }, [deletedServerId]);
+
+  useEffect(() => {
+    if (deletedChannelId) {
+      if (channelId === deletedChannelId.toString())
+        navigate(`/server/${serverId}`);
+      dispatch(setDeletedChannelId(null));
+    }
+  }, [deletedChannelId]);
+
   const toggleSelected = (e) => {
     if (e.target.dataset.key) {
       if (e.target.dataset.key === "home") navigate(`/home`);
@@ -119,7 +122,7 @@ const ServerSideBar = () => {
   };
 
   const checkSelected = (id) => {
-    if (selectedServer === id.toString()) return "selected";
+    if (selected === id.toString()) return "selected";
     return "";
   };
 
@@ -145,6 +148,7 @@ const ServerSideBar = () => {
       "animationend",
       (e) => {
         dispatch(setShowServerModal(false));
+        dispatch(setJoinServerModal(false));
         dispatch(setServerFormPage("start"));
         dispatch(setServerFormSlide("expand"));
       },
@@ -154,6 +158,9 @@ const ServerSideBar = () => {
 
   const handleShowForm = () => {
     dispatch(setShowServerModal(true));
+  };
+  const handleShowJoinForm = () => {
+    dispatch(setJoinServerModal(true));
   };
 
   const handleLoad = () => {
@@ -191,7 +198,7 @@ const ServerSideBar = () => {
       </div>
       <div className="server-divider" />
 
-      {selectedServers.map((server) => {
+      {servers.map((server) => {
         return (
           <div
             className={`server-item-wrapper ${checkSelected(server.id)}`}
@@ -199,15 +206,17 @@ const ServerSideBar = () => {
           >
             <ServerIndexList
               id={server.id}
-              image={server.pictureUrl}
+              image={server.serverPhotoUrl}
               name={server.name}
             />
           </div>
         );
       })}
-
+      {Object.keys(servers).length !== 0 && <div className="server-divider" />}
       <div
-        className={`server-item-wrapper ${showServerModal ? "selected" : ""}`}
+        className={`server-item-wrapper ${
+          showServerFormModal ? "selected" : ""
+        }`}
         onClick={handleShowForm}
       >
         <div
@@ -239,9 +248,46 @@ const ServerSideBar = () => {
         )}
       </div>
 
-      {showServerModal && (
+      {showServerFormModal && (
         <ServerFormModal onClose={closeForm}>
-          <CreateServerForm />
+          <ServerForms />
+        </ServerFormModal>
+      )}
+
+      <div
+        className={`server-item-wrapper ${
+          showJoinServerModal ? "selected" : ""
+        }`}
+        onClick={handleShowJoinForm}
+      >
+        <div
+          id="add-server"
+          data-key="add-server"
+          className="server-icon-wrapper add-server-icon-wrapper"
+          onMouseEnter={showHandler("join-server")}
+          onMouseLeave={leaveHandler}
+          onWheel={leaveHandler}
+        >
+          <i
+            className={`fa-sharp fa-solid fa-compass  ${
+              (showModal && currentModal === "join-server") ||
+              showJoinServerModal
+                ? "fa-spin"
+                : ""
+            }`}
+            style={{ color: iconColor }}
+          ></i>
+        </div>
+
+        {showModal && currentModal === "join-server" && (
+          <ServerToolTip top={top} onClose={() => setShowModal(false)}>
+            <span className="tooltip">Join a Server</span>
+          </ServerToolTip>
+        )}
+      </div>
+      {showJoinServerModal && (
+        <ServerFormModal onClose={closeForm}>
+          <ServerForms />
         </ServerFormModal>
       )}
     </div>

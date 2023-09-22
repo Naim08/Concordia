@@ -1,0 +1,144 @@
+.delete-form {
+  width: 440px;
+  max-height: min(720px, 100vh - 80px);
+  max-height: min(720px, 100svh - 80px);
+  background: #313338;
+  display: flex;
+  flex-direction: column;
+}
+
+.delete-form-header {
+  padding: 16px;
+  font-weight: 600;
+  line-height: 24px;
+  font-size: 20px;
+  color: #f2f3f5;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.delete-form-text {
+  padding: 16px;
+  font-weight: 400;
+  line-height: 20px;
+  font-size: 16px;
+  color: #dbdee1;
+  position: relative;
+  overflow: hidden scroll;
+  background-color: #f0B132;
+  margin: 15px;
+  text-align: center;
+  border-radius: 10px;
+}
+
+.delete-form-text::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.delete-form-text::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
+.delete-form-text::-webkit-scrollbar-thumb {
+  background: #1a1b1e;
+  min-height: 40px;
+  background-clip: padding-box;
+  border: 2px solid transparent;
+  border-radius: 4px;
+}
+
+.delete-form-text::-webkit-scrollbar-track {
+  background: transparent;
+  border-radius: 8px;
+  border: 2px solid transparent;
+}
+
+.delete-form-text strong {
+  font-weight: 600;
+}
+
+.delete-form-options {
+  padding: 16px;
+  display: flex;
+  flex: 0 0 auto;
+  justify-content: end;
+  background: #2b2d31;
+  height: 100%;
+}
+
+.reset-button.cancel, .submit-update-button.delete, .submit-update-button.create {
+  padding: 2px 16px;
+  width: auto;
+  height: 38px;
+  min-width: 96px;
+  min-height: 38px;
+}
+.reset-button.cancel {
+    background-color: #2b2d31!important;
+}
+
+.reset-button.cancel div, .submit-update-button.delete div {
+  margin: 0 auto;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.submit-update-button.delete {
+  background-color: #da373c!important;
+}
+
+.submit-update-button.delete:hover {
+  background-color: #a12828!important;
+}
+
+.submit-update-button.create:disabled, .submit-update-button.create:disabled:hover {
+  background-color: #464a93;
+  color: #959698;
+  cursor: not-allowed;
+}
+
+.submit-update-button.create {
+  background-color: #5865f2!important;
+  color: #ffffff;
+}
+
+.submit-update-button.create:hover {
+  background-color: #4e53c6!important;
+}
+
+.delete-text {
+  margin-bottom: 20px;
+}
+
+.delete-message-container {
+  border-radius: 3px;
+  padding: 15px 0 10px 10px;
+  -webkit-box-shadow: 0 0 0 1px hsl(225 6.3% 12.5%/0.6), 0 2px 10px 0 hsl(0 0% 0%/0.2);
+  box-shadow: 0 0 0 1px hsl(225 6.3% 12.5%/0.6), 0 2px 10px 0 hsl(0 0% 0%/0.2);
+}
+
+.tip-container {
+  margin-top: 20px;
+}
+
+.pro-header {
+  color: #2dc770;
+  font-weight: 900;
+  font-size: 14px;
+  line-height: 18px;
+  text-transform: uppercase;
+}
+
+.delete-tip {
+  color: #dbdee1;
+  font-size: 14px;
+  line-height: 16px;
+  opacity: 0.6;
+}
+
+.delete-form-text.delete-message {
+  padding: 0 8px 20px 16px;
+}

@@ -59,7 +59,7 @@ const LoginForm = () => {
         <form className="login-signup" onSubmit={handleSubmit}>
           <div className="form-header">
             <h1>Welcome back!</h1>
-            <span>We're capy excited to see you again!</span>
+            <span>We're happily excited to see you again!</span>
           </div>
           <div className="form-body">
             <label htmlFor="email" className={errors?.login ? "error" : ""}>

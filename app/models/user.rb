@@ -1,3 +1,19 @@
+# == Schema Information
+#
+# Table name: users
+#
+#  id                  :bigint           not null, primary key
+#  email               :string           not null
+#  username            :string           not null
+#  password_digest     :string           not null
+#  session_token       :string           not null
+#  online_status       :string           default("Offline"), not null
+#  set_online_status   :string           default("Online"), not null
+#  custom_status       :string           default(""), not null
+#  profile_picture_url :string           default(""), not null
+#  created_at          :datetime         not null
+#  updated_at          :datetime         not null
+#
 class User < ApplicationRecord
   has_secure_password
 
@@ -48,13 +64,31 @@ class User < ApplicationRecord
     inverse_of: :member,
     foreign_key: :member_id,
     dependent: :destroy
-
+  has_many :messages,
+    inverse_of: :author,
+    foreign_key: :author_id,
+    dependent: :destroy
   has_many :servers,
     inverse_of: :owner,
     foreign_key: :owner_id,
     dependent: :destroy
-
+  has_many :friendships1,
+    foreign_key: :user1_id,
+    class_name: :Friend,
+    dependent: :destroy
+  has_many :friendships2,
+    foreign_key: :user2_id,
+    class_name: :Friend,
+    dependent: :destroy
   has_many :server_memberships, through: :memberships, source: :server
+  has_many :channel_memberships, through: :server_memberships, source: :channels
+  has_many :friends1, through: :friendships1, source: :user2
+  has_many :friends2, through: :friendships2, source: :user1
+
+  has_many :owned_conversations, class_name: "Conversation", foreign_key: "owner_id", dependent: :destroy
+  has_many :conversation_participants, dependent: :destroy
+  has_many :participating_conversations, through: :conversation_participants, source: :conversation
+  has_many :direct_messages, foreign_key: "creator_id", dependent: :destroy
 
   def self.find_by_credentials(credential, password)
     email_regex = URI::MailTo::EMAIL_REGEXP

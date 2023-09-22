@@ -1,5 +1,6 @@
 class Api::ServersController < ApplicationController
   before_action :require_logged_in, only: [:index, :show, :create, :update, :destroy]
+  before_action :verify_owner, only: [:destroy, :update]
   wrap_parameters include: Server.attribute_names + [:photo], format: :multipart_form
 
   def index
@@ -44,27 +45,34 @@ class Api::ServersController < ApplicationController
   def destroy
     @server = Server.find(params[:id])
 
-    if @server
-      if @server.destroy
-        render :show
-      else
-        render json: { errors: @server.errors }, status: :unprocessable_entity
+    if @server.destroy
+      @server.members.each do |member|
+        UsersChannel.broadcast_to(
+          member,
+          type: "DELETE_SERVER",
+          id: @server.id,
+        )
       end
+      head :no_content
     else
-      render json: { errors: ["Server not found"] }, status: 404
+      render json: { errors: @server.errors }, status: :unprocessable_entity
     end
   end
 
   private
 
   def verify_owner
-    @server = Server.includes(:members).find(params[:id])
+    @server = params[:server] ? Server.includes(:members).find(params[:server][:id]) : Server.includes(:members).find(params[:id])
     if @server.owner_id != current_user.id
       render json: { errors: { error: "Must be server owner" } }, status: :forbidden
     end
   end
 
   def server_params
+    params.require(:server).permit(:name, :server_photo_url)
+  end
+
+  def update_params
     params.require(:server).permit(:name, :server_photo_url)
   end
 end

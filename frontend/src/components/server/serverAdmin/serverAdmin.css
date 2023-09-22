@@ -1,0 +1,204 @@
+.admin-page-wrapper {
+  width: 100vw;
+  height: 100vh;
+  height: 100svh;
+  background: #313338;
+  display: flex;
+}
+
+.admin-sidebar-wrapper {
+  display: flex;
+  justify-content: flex-end;
+  flex: 1 0 218px;
+  background: #2b2d31;
+}
+
+.admin-sidebar {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-end;
+  overflow: hidden scroll;
+  scrollbar-width: auto;
+  scrollbar-color: #1a1b1e;
+}
+
+.admin-sidebar:hover::-webkit-scrollbar-thumb, .admin-sidebar:hover::-webkit-scrollbar-track  {
+  visibility: visible;
+}
+
+.admin-sidebar::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.admin-sidebar::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
+.admin-sidebar::-webkit-scrollbar-thumb {
+  background: #1a1b1e;
+  min-height: 40px;
+  background-clip: padding-box;
+  border: 2px solid transparent;
+  border-radius: 4px;
+}
+
+.admin-sidebar::-webkit-scrollbar-track {
+  background: #2b2d31;
+  border-radius: 8px;
+  border-color: #2b2d31;
+  border: 2px solid #2b2d31;
+}
+
+.admin-sidebar::-webkit-scrollbar-thumb, .admin-sidebar::-webkit-scrollbar-track {
+  visibility: hidden;
+}
+
+.admin-sidebar-options-wrapper {
+  width: 192px;
+  padding: 60px 6px 60px 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.admin-sidebar-option-header {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  padding: 0 10px 6px;
+  font-size: 12px;
+  font-weight: 900;
+  line-height: 16px;
+  text-transform: uppercase;
+  color: #949ba4;
+}
+
+.admin-sidebar-option {
+  padding: 6px 10px;
+  margin-bottom: 2px;
+  font-weight: 500;
+  color: #b5bac1;
+  border-radius: 4px;
+  font-size: 16px;
+  line-height: 20px;
+}
+
+.admin-sidebar-option.icon-option {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.admin-sidebar-option:hover {
+  color: #dbdee1;
+  background: #35373c;
+  cursor: pointer;
+}
+
+.admin-sidebar-option.selected:hover {
+  color: #ffffff;
+  cursor: default;
+}
+
+.admin-sidebar-divider {
+  height: 1px;
+  margin: 8px 10px;
+  background: #3b3d44;
+}
+
+.admin-content-wrapper {
+  display: flex;
+  flex: 1 1 800px;
+  align-items: flex-start;
+  justify-content: flex-start;
+
+  overflow: hidden scroll;
+  scrollbar-width: auto;
+  scrollbar-color: #1a1b1e;
+  position: relative;
+}
+
+.admin-content-wrapper::-webkit-scrollbar {
+  width: 16px;
+  height: 16px;
+}
+
+.admin-content-wrapper::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
+.admin-content-wrapper::-webkit-scrollbar-thumb {
+  background: #1a1b1e;
+  min-height: 40px;
+}
+
+.admin-content-wrapper::-webkit-scrollbar-track {
+  background: #2b2d31;
+  border-radius: 8px;
+}
+
+.admin-content-wrapper::-webkit-scrollbar-thumb, .admin-content-wrapper::-webkit-scrollbar-track {
+  border: 4px solid transparent;
+  background-clip: padding-box;
+  border-radius: 8px;
+}
+
+.admin-content {
+  display: flex;
+  padding: 60px 40px 80px;
+  max-width: 740px;
+  min-width: 460px;
+  width: 660px;
+  position: relative;
+  min-height: calc(100% - 140px);
+}
+
+.admin-escape-option-wrapper {
+  width: 60px;
+  flex: 0 0 36px;
+  padding-top: 60px;
+  margin-right: 21px;
+}
+
+.admin-escape-option {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #b5bac1;
+  position: fixed;
+}
+
+.escape-icon-container {
+  width: 33px;
+  height: 33px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 100%;
+  border: 2px solid #b5bac1;
+  pointer-events: none;
+}
+
+.escape-text {
+  margin-top: 8px;
+  font-size: 13px;
+  font-weight: bold;
+  pointer-events: none;
+}
+
+.admin-escape-option:hover {
+  color: #d1d4d7;
+  cursor: pointer;
+}
+
+.admin-escape-option:hover .escape-icon-container {
+  border-color: #d1d4d7;
+  background: #393c41;
+}
+
+.server-overview {
+  display: flex;
+  width: 100%;
+  height: 10px;
+}

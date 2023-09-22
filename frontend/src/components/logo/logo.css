@@ -8,7 +8,6 @@
   font-weight: 800;
   margin: auto;
   cursor: pointer;
-  top: -20px;
   position: relative;
   letter-spacing: 1.3px;
   color: rgb(255, 255, 255);
@@ -20,6 +19,7 @@ a {
   text-decoration: none;
 }
 
-a.Concordia-logo {
+a.concordia-logo {
   margin-left: -12%;
+  display: flex;
 }

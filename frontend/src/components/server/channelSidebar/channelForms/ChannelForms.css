@@ -1,0 +1,77 @@
+.cancel-button {
+  color: #73767d;
+  transition: color 0.2s ease-in;
+}
+
+.cancel-button:hover {
+  cursor: pointer;
+  color: #f2f3f5;
+  transition: color 0.2s ease-in;
+}
+
+.form-input-container {
+  padding: 0 16px;
+}
+
+.form-input {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+.radio-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.radio-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 12px;
+  background: #43444b;
+  border-radius: 4px;
+  margin-bottom: 8px;
+  cursor: pointer;
+}
+
+.radio-item-description {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  color: #b5bac1;
+}
+
+.radio-channel-type-icon {
+  margin-right: 12px;
+}
+
+.radio-header {
+  color: #dbdee1;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.radio-description-text {
+  font-size: 14px;
+  margin-top: 4px;
+}
+
+.channel-name-input-wrapper {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  background: #1e1f22;
+  border-radius: 3px;
+}
+
+.channel-input-type-icon {
+  height: 100%;
+  padding: 10px 0 10px 8px;
+  color: #dcdee1;
+}
+
+.channel-name-input-wrapper input {
+  width: 100%;
+  padding: 10px 10px 10px 8px;
+}

@@ -10,11 +10,11 @@
 }
 
 .server-form.left {
-  animation: slide-left 0.3s;
+  animation: slide-left .3s;
 }
 
 .server-form.right {
-  animation: slide-right 0.3s;
+  animation: slide-right .3s;
 }
 
 .server-form.join-create {
@@ -36,7 +36,7 @@
 .server-form-header h1 {
   color: #060607;
   font-size: 24px;
-  font-weight: 900;
+  font-weight: 700;
 }
 
 .server-form-subtext {
@@ -55,14 +55,14 @@
   right: 10px;
   display: inline;
   color: #a6a7ab;
-  transition: color 0.2s ease-out;
+  transition: color .2s ease-out;
   padding: 4px;
 }
 
 .server-form-close:hover {
   color: #080809;
   cursor: pointer;
-  transition: color 0.2s ease-in;
+  transition: color .2s ease-in;
 }
 
 .choice-container {
@@ -97,6 +97,7 @@
   align-items: center;
   justify-content: start;
   flex-basis: 100%;
+  font-weight: 500;
 }
 
 .choice-arrow {

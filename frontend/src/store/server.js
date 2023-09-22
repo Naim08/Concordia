@@ -38,6 +38,11 @@ export const getServer = (serverId) => (state) => {
   return state.entities.servers ? state.entities.servers[serverId] : null;
 };
 
+export const getServerPhotoUrl = (serverId) => (state) => {
+  return state.entities.servers[serverId]?.serverPhotoUrl
+    ? state.entities.servers[serverId].serverPhotoUrl
+    : null;
+};
 export const fetchServers = () => async (dispatch) => {
   try {
     const response = await csrfFetch("/api/servers");
@@ -77,11 +82,11 @@ export const createServer = (formData) => async (dispatch) => {
   }
 };
 
-export const updateServer = (serverData) => async (dispatch) => {
+export const updateServer = (serverForm, serverData) => async (dispatch) => {
   try {
     const response = await csrfFetch(`/api/servers/${serverData.id}`, {
       method: "PATCH",
-      body: JSON.stringify(serverData),
+      body: serverForm,
     });
     return response;
   } catch (res) {

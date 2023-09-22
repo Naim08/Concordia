@@ -3,6 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@headlessui/react": "^1.7.17",
+    "@heroicons/react": "^2.0.18",
     "@rails/actioncable": "^7.0.8",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^11.2.7",
@@ -37,7 +39,10 @@
     ]
   },
   "devDependencies": {
-    "redux-logger": "^3.0.6"
+    "autoprefixer": "^10.4.15",
+    "postcss": "^8.4.30",
+    "redux-logger": "^3.0.6",
+    "tailwindcss": "^3.3.3"
   },
   "proxy": "http://localhost:5000"
 }

@@ -118,3 +118,41 @@ export function ServerToolTip({ top, onClose, children }) {
     modalNode
   );
 }
+
+export function SettingPageModal({ onClose, children }) {
+  useEffect(() => {
+    const escListener = (e) => {
+      const deleteModal = document.querySelector(".delete-form");
+      if (e.key === "Escape" && !deleteModal) onClose();
+    };
+
+    document.addEventListener("keydown", escListener);
+    return () => {
+      document.removeEventListener("keydown", escListener);
+    };
+  }, []);
+
+  const modalNode = useContext(ModalContext);
+  if (!modalNode) return null;
+
+  return ReactDOM.createPortal(
+    <div className="setting-page-modal">{children}</div>,
+    modalNode
+  );
+}
+
+export function ActionToolTip({ top, left, onClose, children }) {
+  const modalNode = useContext(ModalContext);
+  if (!modalNode) return null;
+
+  return ReactDOM.createPortal(
+    <div
+      className="action-tooltip"
+      style={{ top: top, left: left }}
+      onMouseEnter={onClose}
+    >
+      {children}
+    </div>,
+    modalNode
+  );
+}

@@ -1,3 +1,17 @@
+# == Schema Information
+#
+# Table name: servers
+#
+#  id               :bigint           not null, primary key
+#  name             :string           not null
+#  owner_id         :bigint           not null
+#  invite_code      :string           not null
+#  server_photo_url :string
+#  private          :boolean          default(FALSE), not null
+#  created_at       :datetime         not null
+#  updated_at       :datetime         not null
+#  first_channel_id :bigint
+#
 require "open-uri"
 
 class Server < ApplicationRecord
@@ -12,7 +26,9 @@ class Server < ApplicationRecord
   has_one_attached :photo
 
   belongs_to :owner, class_name: :User
+  has_many :channels, inverse_of: :server, dependent: :destroy
   has_many :memberships, inverse_of: :server, dependent: :destroy
+  has_many :messages, through: :channels, source: :messages
   has_many :members, through: :memberships, source: :member
 
   private
@@ -33,13 +49,13 @@ class Server < ApplicationRecord
   end
 
   def create_first_channel
-    # first_channel = Channel.create!({
-    #   name: "general",
-    #   server_id: self.id,
-    # })
+    self.first_channel_id = Channel.create!({
+      name: "general",
+      server_id: self.id,
+      channel_type: "text",
+    }).id
 
-    # self.first_channel_id = first_channel.id
-    # self.save!
+    self.save!
     return true
   end
 

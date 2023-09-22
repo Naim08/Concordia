@@ -274,3 +274,7 @@
 .tile-container {
   transform: opacity 0.6s 0.1s, transform 0.6s ease, -webkit-transform 0.6s ease;
 }
+
+.tile1-background1 {
+  bottom: 0px;
+}

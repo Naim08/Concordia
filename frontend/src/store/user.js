@@ -1,11 +1,9 @@
 import csrfFetch from "./csrf";
 import { REMOVE_CURRENT_USER, SET_CURRENT_USER } from "./session";
 
-// action types
 const ADD_USER = "users/ADD_USER";
 const ADD_USERS = "users/ADD_USERS";
 
-// action creators
 export const addUser = (user) => {
   return {
     type: ADD_USER,
@@ -20,7 +18,6 @@ export const addUsers = (users) => {
   };
 };
 
-// thunk action creators
 export const fetchUser = (userId) => async (dispatch) => {
   let res = await csrfFetch(`/api/users/${userId}`);
 

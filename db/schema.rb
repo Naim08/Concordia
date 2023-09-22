@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_09_15_193738) do
+ActiveRecord::Schema[7.0].define(version: 2023_09_22_055914) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -42,6 +42,57 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_15_193738) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "channels", force: :cascade do |t|
+    t.string "name", null: false
+    t.integer "server_id", null: false
+    t.string "description"
+    t.integer "position", default: 0, null: false
+    t.boolean "is_private", default: false, null: false
+    t.string "channel_type", default: "text", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["server_id"], name: "index_channels_on_server_id"
+  end
+
+  create_table "conversation_participants", force: :cascade do |t|
+    t.integer "participant_id", null: false
+    t.integer "conversation_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["conversation_id"], name: "index_conversation_participants_on_conversation_id"
+    t.index ["participant_id"], name: "index_conversation_participants_on_participant_id"
+  end
+
+  create_table "conversations", force: :cascade do |t|
+    t.integer "owner_id", null: false
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_conversations_on_name"
+    t.index ["owner_id"], name: "index_conversations_on_owner_id"
+  end
+
+  create_table "direct_messages", force: :cascade do |t|
+    t.integer "creator_id", null: false
+    t.integer "conversation_id", null: false
+    t.integer "replied_message_id"
+    t.text "content", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["conversation_id"], name: "index_direct_messages_on_conversation_id"
+    t.index ["creator_id"], name: "index_direct_messages_on_creator_id"
+    t.index ["replied_message_id"], name: "index_direct_messages_on_replied_message_id"
+  end
+
+  create_table "friends", force: :cascade do |t|
+    t.bigint "user1_id", null: false
+    t.bigint "user2_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user1_id", "user2_id"], name: "index_friends_on_user1_id_and_user2_id", unique: true
+    t.index ["user2_id"], name: "index_friends_on_user2_id"
+  end
+
   create_table "memberships", force: :cascade do |t|
     t.bigint "server_id", null: false
     t.bigint "member_id", null: false
@@ -52,6 +103,17 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_15_193738) do
     t.index ["member_id"], name: "index_memberships_on_member_id"
     t.index ["server_id", "member_id"], name: "index_memberships_on_server_id_and_member_id", unique: true
     t.index ["server_id"], name: "index_memberships_on_server_id"
+  end
+
+  create_table "messages", force: :cascade do |t|
+    t.string "body", null: false
+    t.bigint "channel_id", null: false
+    t.bigint "author_id", null: false
+    t.string "status", default: "original", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["author_id"], name: "index_messages_on_author_id"
+    t.index ["channel_id"], name: "index_messages_on_channel_id"
   end
 
   create_table "servers", force: :cascade do |t|
@@ -84,7 +146,17 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_15_193738) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "conversation_participants", "conversations"
+  add_foreign_key "conversation_participants", "users", column: "participant_id"
+  add_foreign_key "conversations", "users", column: "owner_id"
+  add_foreign_key "direct_messages", "conversations"
+  add_foreign_key "direct_messages", "direct_messages", column: "replied_message_id"
+  add_foreign_key "direct_messages", "users", column: "creator_id"
+  add_foreign_key "friends", "users", column: "user1_id"
+  add_foreign_key "friends", "users", column: "user2_id"
   add_foreign_key "memberships", "servers"
   add_foreign_key "memberships", "users", column: "member_id"
+  add_foreign_key "messages", "channels"
+  add_foreign_key "messages", "users", column: "author_id"
   add_foreign_key "servers", "users", column: "owner_id"
 end
