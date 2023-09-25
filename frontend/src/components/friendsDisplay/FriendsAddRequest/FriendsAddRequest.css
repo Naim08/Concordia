@@ -1,0 +1,110 @@
+.add-friend-wrapper {
+  display: flex;
+  flex-direction: column;
+  padding: 20px 30px;
+  border-bottom: 1px solid #3f4147;
+}
+
+.add-friend-title {
+  font-weight: bold;
+  font-size: 16px;
+  margin-bottom: 13px;
+}
+
+.add-friend-form {
+  min-height: 85px;
+}
+
+.add-friend-form-span {
+  font-size: 14px;
+  color: #b5bac1;
+}
+
+.add-friend-input-container {
+  display: flex;
+  margin-top: 18px;
+  padding: 0 12px;
+  background: #1e1f22;
+  justify-content: center;
+  align-items: center;
+  border-radius: 8px;
+  border: 1px solid #1e1f22;
+  overflow: clip;
+  min-width: 250px;
+}
+
+.add-friend-input-wrapper {
+  padding: 4px 0;
+  margin-right: 16px;
+  flex-basis: 100%;
+  display: flex;
+  min-height: 40px;
+  min-width: 40px;
+}
+
+.add-friend-input {
+  margin: 0;
+  min-width: 40px;
+  flex-basis: 100%;
+  padding: 0;
+  font-size: 16px;
+  font-weight: bold;
+  letter-spacing: .04em;
+  line-height: 20px;
+  white-space: pre;
+}
+
+.add-friend-input::placeholder {
+  font-weight: 400;
+  color: #7f8184;
+}
+
+.add-friend-button {
+  margin: 0;
+  padding: 2px 16px;
+  background: #5865f2;
+  height: 32px;
+  min-width: 160px;
+  font-size: 14px;
+}
+
+.add-friend-button:hover {
+  font-size: 14px;
+}
+
+.add-friend-button:disabled {
+  cursor:not-allowed;
+  background: #3b428a;
+  color: #8d8d91;
+}
+
+.add-friend-button:disabled:hover {
+  background: #3b428a;
+  color: #8d8d91
+}
+
+.add-friend-result {
+  font-size: 14px;
+  margin-top: 10px;
+}
+
+.add-friend-result.error {
+  color: #fa777c;
+  white-space: pre-line;
+}
+
+.add-friend-result.success {
+  color: #2dc770;
+}
+
+.add-friend-input-container.error {
+  border-color: #fa777c !important;
+}
+
+.add-friend-input-container.success {
+  border-color: #2dc770 !important;
+}
+
+.bold {
+  font-weight: bold;
+}

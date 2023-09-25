@@ -1,9 +1,5 @@
-json.extract! user, :id, :username, :email
-if user.profile_picture_url == nil
-  json.profile_picture_url ""
-else
-  json.profile_picture_url user.profile_picture_url
-end
+json.extract! user, :id, :username, :email, :custom_status, :online_status
+json.profile_picture_url user.photo.url if user.photo.attached?
 
 json.servers user.servers.map(&:id)
 json.conversations user.conversations.map(&:id)

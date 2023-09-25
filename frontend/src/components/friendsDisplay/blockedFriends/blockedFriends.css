@@ -1,0 +1,10 @@
+.game-container {
+  height: 100%;
+  width: 100%;
+  display: flex;
+}
+
+.placeholder-game {
+  width: 100%;
+  min-width: 325px;
+}

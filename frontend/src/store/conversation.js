@@ -267,6 +267,15 @@ export const conversationParticipationReducer = (state = {}, action) => {
       return newState;
     case RECEIVE_CONVERSATION_PARTICIPATIONS:
       return { ...action.conversationParticipations };
+    case RECEIVE_CONVERSATIONS:
+      console.log(action);
+      for (const key in action.conversations) {
+        const conversation = action.conversations[key];
+        for (const id in conversation.conversationParticipant) {
+          newState[id] = conversation.conversationParticipant[id];
+        }
+      }
+      return newState;
     default:
       return state;
   }

@@ -4,6 +4,7 @@ import { unauthorizedSession } from "./session";
 import { RECEIVE_CONVERSATION } from "./conversation";
 
 export const RECEIVE_DIRECT_MESSAGE = "directMessage/RECEIVE_DIRECT_MESSAGE";
+export const RECEIVE_DIRECT_MESSAGES = "directMessage/RECEIVE_DIRECT_MESSAGES";
 export const REMOVE_DIRECT_MESSAGE = "directMessage/REMOVE_DIRECT_MESSAGE";
 
 const receiveDirectMessage = (directMessage) => {
@@ -20,6 +21,38 @@ const removeDirectMessage = (directMessageId) => {
   };
 };
 
+const receiveDirectMessages = (directMessages) => {
+  return {
+    type: RECEIVE_DIRECT_MESSAGES,
+    directMessages: directMessages,
+  };
+};
+
+export const getDirectMessages = (state) => {
+  return state.entities.directMessages
+    ? Object.values(state.entities.directMessages).sort((a, b) =>
+        a.updatedAt < b.updatedAt ? 1 : -1
+      )
+    : [];
+};
+
+export const fetchDirectMessages = (conversationId) => async (dispatch) => {
+  try {
+    const response = await csrfFetch(`api/direct_messages/${conversationId}`);
+
+    if (response.ok) {
+      const directMessages = await response.json();
+      dispatch(receiveDirectMessage(directMessages));
+    } else if (response.status === 401) {
+      dispatch(unauthorizedSession());
+    } else {
+      const errors = await response.json();
+      dispatch(addErrors(errors));
+    }
+  } catch (error) {
+    dispatch(addErrors([error.message]));
+  }
+};
 export const fetchDirectMessage = (directMessageId) => async (dispatch) => {
   try {
     const response = await csrfFetch(`api/direct_messages/${directMessageId}`);

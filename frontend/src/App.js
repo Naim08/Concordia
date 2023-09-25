@@ -12,6 +12,7 @@ import HomePage from "./components/home";
 import ServerSideBar from "./components/server/serverSideBar";
 import NotFound from "./components/404/notFound";
 import ServerPage from "./components/server";
+import MessageDisplay from "./components/message";
 
 function App() {
   return (
@@ -31,7 +32,7 @@ function App() {
               <>
                 {" "}
                 <ServerSideBar />
-                <ServerPage />
+                <HomePage />
               </>
             }
           />
@@ -63,6 +64,16 @@ function App() {
         <Route path="/conversations" element={<ProtectedRoute />}>
           <Route
             index
+            element={
+              <>
+                {" "}
+                <ServerSideBar />
+                <ServerPage />
+              </>
+            }
+          />
+          <Route
+            path=":conversationId"
             element={
               <>
                 {" "}

@@ -1,5 +1,5 @@
 class Api::DirectMessagesController < ApplicationController
- before_action :require_logged_in
+  before_action :require_logged_in
 
   def show
     @direct_message = DirectMessage.find(params[:id])
@@ -18,7 +18,7 @@ class Api::DirectMessagesController < ApplicationController
     @direct_message.conversation_id = @conversation.id
 
     if @direct_message.save
-      ConversationChannel.broadcast_to(@conversation, @direct_message)
+      ConversationsChannel.broadcast_to(@conversation, type: "RECEIVE_DIRECT_MESSAGE", **from_template("api/direct_messages/show", direct_message: @direct_message))
       render :show
     else
       render json: @direct_message.errors.full_messages, status: 422
@@ -29,7 +29,7 @@ class Api::DirectMessagesController < ApplicationController
     @direct_message = DirectMessage.find(params[:id])
     @conversation = Conversation.find(@direct_message.conversation_id)
     if (@direct_message && @direct_message.creator_id == current_user.id) && @direct_message.update(direct_message_params)
-      ConversationChannel.broadcast_to(@conversation, @direct_message)
+      ConversationsChannel.broadcast_to(@conversation, type: "UPDATE_DIRECT_MESSAGE", **from_template("api/direct_messages/show", direct_message: @direct_message))
       render :show
     else
       render json: @direct_message.errors.full_messages, status: 422
@@ -40,7 +40,7 @@ class Api::DirectMessagesController < ApplicationController
     @direct_message = DirectMessage.find(params[:id])
     @conversation = Conversation.find(@direct_message.conversation_id)
     if (@direct_message.creator_id == current_user.id && @direct_message.destroy)
-      ConversationChannel.broadcast_to(@conversation, @direct_message)
+      ConversationsChannel.broadcast_to(@conversation, type: "DELETE_DIRECT_MESSAGE", id: @direct_message.id)
       render :show
     else
       render json: @direct_message.errors.full_messages, status: 422

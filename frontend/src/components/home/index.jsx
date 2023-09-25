@@ -1,57 +1,100 @@
+import "./home.css";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate, useLocation } from "react-router-dom";
-import { getCurrentUser } from "../../store/session";
 import {
-  getSelectedServer,
   getHomeRedirect,
   setAnimateOfflineFriends,
   setHomeRedirect,
   setSelectedServer,
 } from "../../store/ui";
-import myConsumer from "../../consumer";
-import { fetchServers, getServers } from "../../store/server";
 
+import MainSideBar from "../mainSideBar";
+import FriendsDisplay from "../friendsDisplay";
+import consumer from "../../consumer";
+import {
+  addReceivedRequest,
+  addSentRequest,
+  fetchFriendRequests,
+  removeReceivedRequest,
+  removeSentRequest,
+  resetFriendRequests,
+} from "../../store/friendRequest";
+import {
+  addFriend,
+  removeFriend,
+  fetchFriends,
+  resetFriends,
+} from "../../store/friend";
+
+import { getCurrentUser } from "../../store/session";
 const HomePage = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const location = useLocation();
 
-  const currentUser = useSelector(getCurrentUser);
-  const getHomeRedirectState = useSelector(getHomeRedirect);
+  const sessionUser = useSelector(getCurrentUser);
+  const homeRedirect = useSelector(getHomeRedirect);
+  document.title = `Concordia | Friends`;
+
+  useEffect(() => {
+    if (homeRedirect) dispatch(setHomeRedirect(false));
+  }, [homeRedirect]);
+
+  useEffect(() => {
+    if (sessionUser) {
+      dispatch(setSelectedServer("home"));
+      dispatch(fetchFriends());
+      dispatch(fetchFriendRequests());
+    }
+
+    const friendSubscription = consumer.subscriptions.create(
+      { channel: "FriendsChannel" },
+      {
+        received: ({ type, friend, friendRequest, id }) => {
+          switch (type) {
+            case "UPDATE_FRIEND":
+              dispatch(addFriend(friend));
+              break;
+            case "DELETE_FRIEND":
+              dispatch(removeFriend(id));
+              break;
+            case "ADD_FRIEND":
+              dispatch(addFriend(friend));
+              break;
+            case "DELETE_SENT_REQUEST":
+              dispatch(removeSentRequest(id));
+              break;
+            case "UPDATE_SENT_REQUEST":
+              dispatch(addSentRequest(friendRequest));
+              break;
+            case "ADD_INCOMING_REQUEST":
+              dispatch(addReceivedRequest(friendRequest));
+              break;
+            case "DELETE_INCOMING_REQUEST":
+              dispatch(removeReceivedRequest(id));
+              break;
+            case "UPDATE_INCOMING_REQUEST":
+              dispatch(addReceivedRequest(friendRequest));
+              break;
+            default:
+            // console.log("unknown broadcast type");
+          }
+        },
+      }
+    );
+
+    return () => {
+      friendSubscription?.unsubscribe();
+      dispatch(resetFriends());
+      dispatch(resetFriendRequests());
+      dispatch(setAnimateOfflineFriends(false));
+    };
+  }, [dispatch]);
+
+  if (!sessionUser) return <Redirect to="/login" />;
 
   return (
-    <div className="home-page">
-      <i className="fa-solid fa-user-bounty-hunter"></i>
-      <div className="bg-gray-800 text-white h-screen w-20 flex flex-col items-center py-4">
-        {/* Logo at the top */}
-        <i
-          className="fa-brands fa-discord fa-beat fa-lg"
-          style={{ color: "#5765f2", fontSize: "24px" }}
-        ></i>
-
-        {/* List of servers */}
-        <div className="flex-1">
-          {Array(10)
-            .fill(null)
-            .map((_, index) => (
-              <div key={index} className="mb-2">
-                <div className="h-12 w-12 bg-gray-700 rounded-full flex items-center justify-center">
-                  <span className="text-xs">{index + 1}</span>
-                </div>
-              </div>
-            ))}
-        </div>
-
-        {/* User icon at the bottom */}
-        <div>
-          <i
-            className="fa-solid fa-user-alien fa-lg fa-bounce"
-            style={{ color: "#1a5dd1" }}
-          ></i>
-        </div>
-      </div>
-      <h1>Home Page</h1>
+    <div className="home">
+      <MainSideBar />
+      <FriendsDisplay />
     </div>
   );
 };

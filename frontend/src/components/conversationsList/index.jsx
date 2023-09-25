@@ -13,6 +13,7 @@ import {
 import { getCurrentUser } from "../../store/session";
 import consumer from "../../consumer";
 import ConversationIndexList from "./ConversationIndexList";
+import ConvoListItem from "../friendsDisplay/FriendsListItem/ConvoListItem";
 const ConversationsList = () => {
   const dispatch = useDispatch();
   const [conversations, setConversations] = useState([]);
@@ -50,32 +51,85 @@ const ConversationsList = () => {
     };
   }, [dispatch]);
 
-  const checkSelected = (id) => {
-    if (selected === id.toString()) return "selected";
-    return "";
-  };
-  console.log(convos);
+  useEffect(() => {
+    const conversationChannel = consumer.subscriptions.create(
+      { channel: "ConversationsChannel", id: conversationId },
+      {
+        received: (data) => {
+          switch (data.type) {
+            case "RECEIVE_DIRECT_MESSAGE":
+              setMessages((prevMessages) => [
+                ...prevMessages,
+                data.direct_message,
+              ]);
+              break;
+            case "UPDATE_DIRECT_MESSAGE":
+              setMessages((prevMessages) => [
+                ...prevMessages,
+                data.direct_message,
+              ]);
+              break;
+            case "DELETE_DIRECT_MESSAGE":
+              setMessages((prevMessages) => [
+                ...prevMessages,
+                data.direct_message,
+              ]);
+              break;
+
+            // Handle other types of data if necessary
+            default:
+              console.log("Unknown event type:", data.type);
+          }
+        },
+      }
+    );
+
+    return () => {
+      conversationChannel.unsubscribe();
+    };
+  }, [dispatch, conversationId]);
 
   return (
     <>
       {convos.map((convo) => {
         return (
-          <div className="friend-box" key={convo.id}>
-            <div className={`server-item-wrapper ${checkSelected(convo.id)}`}>
-              <ConversationIndexList
-                id={convo.id}
-                image={convo.participant.profilePictureUrl}
-                name={convo.participant.username || "Untitled Conversation"}
-                isServer={false}
-              />
-            </div>
-            <div className="username-place-holder">
-              {convo.participant.username.toUpperCase()}
-            </div>
-          </div>
+          <ConvoListItem
+            userId={convo.participant.id}
+            name={convo.participant.username}
+            status={convo.participant.onlineStatus}
+            customStatus={convo.participant.customStatus}
+            picture={
+              convo.participant.profilePictureUrl
+                ? convo.participant.profilePictureUrl
+                : ""
+            }
+            key={convo.id}
+            actions="friendItem"
+            conversationId={convo.id}
+          />
         );
       })}
     </>
+    //   return (
+    //     <>
+    //       {convos.map((convo) => {
+    //         return (
+    //           <div className="friend-box" key={convo.id}>
+    //             <div className={`server-item-wrapper ${checkSelected(convo.id)}`}>
+    //               <ConversationIndexList
+    //                 id={convo.id}
+    //                 image={convo.participant.profilePictureUrl}
+    //                 name={convo.participant.username || "Untitled Conversation"}
+    //                 isServer={false}
+    //               />
+    //             </div>
+    //             <div className="username-place-holder">
+    //               {convo.participant.username.toUpperCase()}
+    //             </div>
+    //           </div>
+    //         );
+    //       })}
+    //     </>
     // <>
     //    {
     //     convos.map((convo) => {
