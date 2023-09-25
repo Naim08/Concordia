@@ -9,6 +9,7 @@ import * as sessionActions from "./store/session";
 import csrfFetch from "./store/csrf";
 import * as serversReducer from "./store/server";
 import { ModalProvider } from "./components/modal/modal";
+import * as conversationReducer from "./store/conversation";
 
 const store = configureStore();
 
@@ -34,6 +35,7 @@ if (process.env.NODE_ENV !== "production") {
   window.csrfFetch = csrfFetch;
   window.sessionActions = sessionActions;
   window.serversReducer = serversReducer;
+  window.conversationReducer = conversationReducer;
 }
 
 if (

@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.4cce4d2a.css",
-    "main.js": "/static/js/main.cd6021b7.js",
+    "main.css": "/static/css/main.15acadf7.css",
+    "main.js": "/static/js/main.fae57f10.js",
     "static/media/404_Page.gif": "/static/media/404_Page.b4ba0790bf44cc4ad631.gif",
     "static/media/LoginBackground.png": "/static/media/LoginBackground.195f501abf1cf8a7f027.png",
     "static/media/voice_channel.svg": "/static/media/voice_channel.540f58e7575886613afd70f641040565.svg",
@@ -22,14 +22,17 @@
     "static/media/gg2 sans Medium.woff2": "/static/media/gg2 sans Medium.c1b53be672aac192a996.woff2",
     "static/media/discord_logo.png": "/static/media/discord_logo.57f6cbbbcdb8a07821a0.png",
     "static/media/splashbackground1.svg": "/static/media/splashbackground1.cee8c404dad14e615fd4d252741afd11.svg",
+    "static/media/create_icon.svg": "/static/media/create_icon.c4b7801fb3f0df3378617f386f91820f.svg",
+    "static/media/join_icon.svg": "/static/media/join_icon.2072f15a7a61e7d69c05cf95907118eb.svg",
     "static/media/icons8-discord-128.svg": "/static/media/icons8-discord-128.9ef8c2c2c50012cc2bfd23a9ce9120f4.svg",
     "static/media/star.svg": "/static/media/star.a3f3696d42e79a64b2fc679b6fef9bc4.svg",
     "index.html": "/index.html",
-    "main.4cce4d2a.css.map": "/static/css/main.4cce4d2a.css.map",
-    "main.cd6021b7.js.map": "/static/js/main.cd6021b7.js.map"
+    "static/media/choice_arrow.svg": "/static/media/choice_arrow.48340e291a1e5f7e391d20ed91e0ded4.svg",
+    "main.15acadf7.css.map": "/static/css/main.15acadf7.css.map",
+    "main.fae57f10.js.map": "/static/js/main.fae57f10.js.map"
   },
   "entrypoints": [
-    "static/css/main.4cce4d2a.css",
-    "static/js/main.cd6021b7.js"
+    "static/css/main.15acadf7.css",
+    "static/js/main.fae57f10.js"
   ]
 }

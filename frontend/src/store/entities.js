@@ -5,6 +5,9 @@ import channelsReducer from "./channel";
 import membersReducer from "./member";
 import friendsReducer from "./friend";
 import messagesReducer from "./message";
+import directMessagesReducer from "./directMessage";
+import conversationsReducer from "./conversation";
+import { conversationParticipationReducer } from "./conversation";
 
 const entitiesReducer = combineReducers({
   user: usersReducer,
@@ -13,6 +16,9 @@ const entitiesReducer = combineReducers({
   members: membersReducer,
   friends: friendsReducer,
   messages: messagesReducer,
+  directMessages: directMessagesReducer,
+  conversations: conversationsReducer,
+  conversationParticipation: conversationParticipationReducer,
 });
 
 export default entitiesReducer;

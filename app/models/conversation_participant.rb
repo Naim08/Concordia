@@ -9,9 +9,10 @@
 #  updated_at      :datetime         not null
 #
 class ConversationParticipant < ApplicationRecord
-  # Associations
-  belongs_to :user, foreign_key: "participant_id"
-  belongs_to :conversation
+  belongs_to :conversation, foreign_key: :conversation_id, class_name: :Conversation
+  belongs_to :participant, foreign_key: :participant_id, class_name: :User
+
+  has_one :owner, through: :conversation, source: :owner
 
   # Validations (if needed)
   validates :participant_id, presence: true

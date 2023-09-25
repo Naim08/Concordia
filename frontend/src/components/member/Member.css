@@ -1,0 +1,63 @@
+.member-list-container {
+  min-width: 240px;
+  max-width: 240px;
+  height: 100%;
+  overflow: hidden scroll;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  background: #2b2d31;
+}
+
+.member-list-container::-webkit-scrollbar {
+  width: 5px;
+  border-radius: 10px;
+}
+
+.member-list-container::-webkit-scrollbar-thumb {
+  background: #1a1b1e;
+  border-radius: 10px;
+  visibility: hidden;
+}
+
+.member-list-container:hover::-webkit-scrollbar-thumb  {
+  visibility: visible;
+}
+
+.member-list-container::-webkit-scrollbar-track {
+  background: transparent;
+  border-radius: 10px;
+}
+
+.member-positions-header {
+  display: flex;
+  justify-content: baseline;
+  padding: 24px 8px 0 16px;
+  height: 15px;
+}
+
+.member-position {
+  color: #949ba4;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.icon-wrapper.crown-icon {
+  position: relative;
+  height: 12px;
+  width: 12px;
+  top: 7px;
+  left: -88px;
+}
+
+.icon-wrapper.crown-icon:hover {
+  cursor: default;
+}
+
+.crown-icon {
+  color: #f0b132;
+}
+
+.member-list-spacer {
+  min-height: 20px;
+  max-height: 20px;
+}

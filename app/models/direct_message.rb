@@ -12,10 +12,11 @@
 #
 class DirectMessage < ApplicationRecord
   # Associations
-  belongs_to :creator, class_name: "User"
-  belongs_to :conversation
   belongs_to :replied_message, class_name: "DirectMessage", optional: true
   has_many :replies, class_name: "DirectMessage", foreign_key: "replied_message_id", dependent: :nullify
+
+  belongs_to :author, foreign_key: :creator_id, class_name: :User
+  belongs_to :conversation, foreign_key: :conversation_id, class_name: :Conversation
 
   # Validations (if needed)
   validates :creator_id, presence: true

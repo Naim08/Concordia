@@ -10,26 +10,25 @@
 #
 class Conversation < ApplicationRecord
   # Associations
-  belongs_to :owner, class_name: "User"
-  has_many :conversation_participants, dependent: :destroy
-  has_many :participants, through: :conversation_participants, source: :user
-  has_many :direct_messages, dependent: :destroy
-
+  belongs_to :owner, foreign_key: :owner_id, class_name: :User
+  has_many :conversation_participants, foreign_key: :conversation_id, class_name: :ConversationParticipant
+  has_many :participants, through: :conversation_participants, source: :participant
+  has_many :direct_messages, foreign_key: :conversation_id, class_name: :DirectMessage
   # Validations (if needed)
   validates :owner_id, presence: true
+  before_validation :set_random_name, if: -> { name.blank? }
 
-  def self.find_or_create_conversation(user1, user2)
-    conversation = Conversation.joins(:conversation_participants)
-                               .where(conversation_participants: { user_id: user1.id })
-                               .where(conversation_participants: { user_id: user2.id })
-                               .first
-    if conversation
-      conversation
-    else
-      conversation = Conversation.create(owner_id: user1.id)
-      ConversationParticipant.create(user_id: user1.id, conversation_id: conversation.id)
-      ConversationParticipant.create(user_id: user2.id, conversation_id: conversation.id)
-      conversation
+  private
+
+  def set_random_name
+    # Generate the initial random name using Faker
+    generated_name = "#{Faker::Lorem.word.capitalize}#{Faker::Lorem.word.capitalize}"
+
+    # Check for uniqueness and regenerate if necessary
+    while Conversation.exists?(name: generated_name)
+      generated_name = "#{Faker::Lorem.word.capitalize}#{Faker::Lorem.word.capitalize}"
     end
+
+    self.name = generated_name
   end
 end

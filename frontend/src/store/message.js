@@ -60,7 +60,6 @@ export const createMessage = (message) => async (dispatch) => {
       body: JSON.stringify(message),
     });
 
-    // add message dispatch handled with broadcast subscription
     return response;
   } catch (res) {
     if (res.status === 401) dispatch(unauthorizedSession());
@@ -73,7 +72,6 @@ export const deleteMessage = (messageId) => async (dispatch) => {
       method: "DELETE",
     });
 
-    // delete message dispatch handled with broadcast subscription
     return response;
   } catch (res) {
     if (res.status === 401) dispatch(unauthorizedSession());

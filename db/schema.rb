@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_09_22_055914) do
+ActiveRecord::Schema[7.0].define(version: 2023_09_22_181704) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -84,6 +84,16 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_22_055914) do
     t.index ["replied_message_id"], name: "index_direct_messages_on_replied_message_id"
   end
 
+  create_table "friend_requests", force: :cascade do |t|
+    t.bigint "sender_id", null: false
+    t.bigint "receiver_id", null: false
+    t.string "status", default: "pending", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["receiver_id"], name: "index_friend_requests_on_receiver_id"
+    t.index ["sender_id"], name: "index_friend_requests_on_sender_id"
+  end
+
   create_table "friends", force: :cascade do |t|
     t.bigint "user1_id", null: false
     t.bigint "user2_id", null: false
@@ -152,6 +162,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_22_055914) do
   add_foreign_key "direct_messages", "conversations"
   add_foreign_key "direct_messages", "direct_messages", column: "replied_message_id"
   add_foreign_key "direct_messages", "users", column: "creator_id"
+  add_foreign_key "friend_requests", "users", column: "receiver_id"
+  add_foreign_key "friend_requests", "users", column: "sender_id"
   add_foreign_key "friends", "users", column: "user1_id"
   add_foreign_key "friends", "users", column: "user2_id"
   add_foreign_key "memberships", "servers"

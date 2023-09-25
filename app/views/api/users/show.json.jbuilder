@@ -7,5 +7,5 @@ json.user do
     :online_status,
     :created_at
 
-  # json.profile_picture_url @user.photo.attached? ? @user.photo.url : @user.profile_picture_url
+  json.profile_picture_url @user.photo.url if @user.photo.attached?
 end

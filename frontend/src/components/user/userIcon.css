@@ -1,0 +1,53 @@
+.user-icon {
+  min-width: 50px;
+}
+
+.user-profile-pic {
+  width: 32px;
+  height: 32px;
+  border-radius: 100%;
+  position: relative;
+}
+
+.status-icon {
+  width: 13px;
+  height: 13px;
+  border-radius: 100%;
+  position: relative;
+  bottom: -3px;
+  right: 10px;
+}
+
+.filler-profile-pic {
+  border-radius: 100%;
+  min-width: 32px;
+  min-height: 32px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #777e8a;
+}
+
+.dummy-pic {
+
+  color: white;
+}
+
+.filler-profile-icon {
+  width: 20px;
+  height: 20px;
+}
+
+.filler-status-icon {
+  width: 13px;
+  height: 13px;
+  border-radius: 100%;
+  position: relative;
+  bottom: -11px;
+  right: 10px;
+}
+
+.filler-container {
+  display: flex;
+  align-items: center;
+}

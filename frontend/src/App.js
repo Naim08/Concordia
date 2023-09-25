@@ -60,6 +60,18 @@ function App() {
             }
           />
         </Route>
+        <Route path="/conversations" element={<ProtectedRoute />}>
+          <Route
+            index
+            element={
+              <>
+                {" "}
+                <ServerSideBar />
+                <ServerPage />
+              </>
+            }
+          />
+        </Route>
         <Route path="*" element={<NotFound />} />
       </Routes>
     </div>

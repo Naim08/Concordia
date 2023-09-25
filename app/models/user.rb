@@ -10,11 +10,13 @@
 #  online_status       :string           default("Offline"), not null
 #  set_online_status   :string           default("Online"), not null
 #  custom_status       :string           default(""), not null
-#  profile_picture_url :string           default(""), not null
 #  created_at          :datetime         not null
 #  updated_at          :datetime         not null
 #
+require "open-uri"
+
 class User < ApplicationRecord
+  avatar_url = Faker::Avatar.image
   has_secure_password
 
   STATUS = [
@@ -48,6 +50,7 @@ class User < ApplicationRecord
   validate :validate_username
 
   before_validation :ensure_session_token
+  before_validation :generate_default_pic, on: :create
   before_create :add_tag_number
   before_update :ensure_unique_tag_username
 
@@ -80,15 +83,25 @@ class User < ApplicationRecord
     foreign_key: :user2_id,
     class_name: :Friend,
     dependent: :destroy
+  has_many :sent_friend_requests,
+           foreign_key: :sender_id,
+           class_name: :FriendRequest,
+           dependent: :destroy
+  has_many :received_friend_requests,
+    foreign_key: :receiver_id,
+    class_name: :FriendRequest,
+    dependent: :destroy
   has_many :server_memberships, through: :memberships, source: :server
   has_many :channel_memberships, through: :server_memberships, source: :channels
   has_many :friends1, through: :friendships1, source: :user2
   has_many :friends2, through: :friendships2, source: :user1
+  has_many :friend_requesters, through: :received_friend_requests, source: :sender
+  has_many :requested_friends, through: :sent_friend_requests, source: :receiver
 
-  has_many :owned_conversations, class_name: "Conversation", foreign_key: "owner_id", dependent: :destroy
-  has_many :conversation_participants, dependent: :destroy
-  has_many :participating_conversations, through: :conversation_participants, source: :conversation
-  has_many :direct_messages, foreign_key: "creator_id", dependent: :destroy
+  has_many :direct_messages, foreign_key: :creator_id, class_name: :DirectMessage, dependent: :destroy
+  has_many :owned_conversations, foreign_key: :owner_id, class_name: :Conversation
+  has_many :conversation_participated_in, foreign_key: :participant_id, class_name: :ConversationParticipant, dependent: :destroy
+  has_many :conversations, through: :conversation_participated_in, source: :conversation
 
   def self.find_by_credentials(credential, password)
     email_regex = URI::MailTo::EMAIL_REGEXP
@@ -164,5 +177,16 @@ class User < ApplicationRecord
     elsif /(^everyone$)|(^here$)/.match(username)
       errors.add(:username, "Can't be 'everyone' or 'here'")
     end
+  end
+
+  def generate_default_pic
+    # Check if a profile_picture is already attached
+    return if photo.attached?
+
+    # Generate a random avatar URL using Faker
+    avatar_url = Faker::Avatar.image
+
+    # Attach the image to the user's profile_picture
+    self.photo.attach(io: URI.open(avatar_url), filename: "default_profile.jpg", content_type: "image/jpg")
   end
 end

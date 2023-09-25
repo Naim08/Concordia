@@ -1,0 +1,115 @@
+.message-nav-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 48px;
+  max-height: 48px;
+  padding: 0 8px;
+  font-size: 16px;
+  border-bottom: 2px solid #26282c;
+}
+
+.actions-container {
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  min-width: 225px;
+}
+
+.message-search-bar-wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.channel-header-icon {
+  color: #80848e;
+  min-width: 20px;
+}
+
+.channel-header-name {
+  font-size: 16px;
+  line-height: 18px;
+  font-weight: 900;
+  color: #f2f3f5;
+  margin-left: 8px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.icon-wrapper.selected {
+  color: #dbdee1;
+  background: transparent;
+}
+
+.message-search-input {
+  height: 20px;
+  width: 100px;
+  padding: 2px 10px;
+  margin: 1px 0px 1px 1px;
+  font-size: 14px;
+  line-height: 14px;
+  flex-basis: 100%;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  transition: width 0.2s ease-in;
+}
+
+.message-search-input::placeholder {
+  color: #949ba4;
+  opacity: 1;
+}
+
+.message-search-input:-ms-input-placeholder {
+  color:#949ba4;
+}
+
+.message-search-input::-ms-input-placeholder {
+  color: #949ba4;
+}
+
+.message-search-input:focus {
+  width: 200px;
+  transition: width 0.2s ease-out;
+}
+
+.message-search-icon-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #1e1f22;
+  color: #b5bac1;
+  height: 20px;
+  min-height: 20px;
+  width: 20px;
+  min-width: 20px;
+  margin: 1px 0;
+  border-top-right-radius: 3px;
+  border-bottom-right-radius: 3px;
+  padding: 2px;
+}
+
+.message-search-clear {
+  display: none;
+}
+
+.message-search-clear:hover {
+  color: #dbdee1;
+  cursor: pointer;
+}
+
+.message-search-empty, .message-search-clear {
+  margin-top: 4px;
+  animation: spin 0.2s ease-out;
+}
+
+@keyframes spin {
+  from {
+      opacity: 0%;
+      transform:rotate(360deg);
+  }
+  to {
+      opacity: 100%;
+      transform:rotate(0deg);
+  }
+}

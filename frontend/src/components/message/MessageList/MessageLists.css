@@ -1,0 +1,41 @@
+.message-list-wrapper {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  max-width: calc(100vw - 310px);
+}
+
+.messages-list {
+  overflow: hidden scroll;
+  scrollbar-width: 8px;
+  scrollbar-color: #1a1b1e;
+  height: 100%;
+  width: calc(100% - 12px);
+  display: flex;
+  flex-direction: column;
+  padding-right: 8px;
+  margin-right: 2px;
+}
+
+.messages-list::-webkit-scrollbar {
+  width: 8px;
+  border-radius: 10px;
+}
+
+.messages-list::-webkit-scrollbar-thumb {
+  background: #1a1b1e;
+  border-radius: 10px;
+}
+
+.messages-list::-webkit-scrollbar-track {
+  background: #2b2d31;
+  border-radius: 10px;
+  margin: 2px 0;
+}
+
+.message-list-spacer {
+  min-height: 30px;
+  max-height: 30px;
+}

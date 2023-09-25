@@ -21,6 +21,12 @@ Rails.application.routes.draw do
     resources :friends, only: [:index, :destroy]
     resources :friend_requests, only: [:index, :create, :destroy, :update]
     resources :memberships, only: [:create, :destroy]
+
+    resources :conversations, only: [:index, :show, :create, :destroy] do
+      resources :direct_messages, only: [:create]
+    end
+    resources :direct_messages, only: [:index, :update, :destroy, :show]
+    resources :conversation_participants, only: [:show, :create, :destroy]
   end
 
   mount ActionCable.server => "/cable"

@@ -1,0 +1,246 @@
+.message-item-wrapper {
+  display: flex;
+  justify-content: baseline;
+  padding: 2px 10px 0 10px;
+  max-width: 95%;
+}
+
+.time-message-wrapper {
+  max-width: 100%;
+  overflow-x: clip;
+}
+
+.message-item-wrapper.simple {
+  align-items: baseline;
+  margin-top: 0;
+  padding-top: 0;
+}
+
+.message-time {
+  font-size: 10px;
+  letter-spacing: 0.05em;
+  min-width: 55px;
+  max-width: 55px;
+  text-align: center;
+  color: #949ba4;
+  visibility: hidden;
+}
+
+.profile-pic-wrapper {
+  min-width: 55px;
+  max-width: 55px;
+  display: flex;
+  justify-content: center;
+}
+
+.message-profile-pic {
+  width: 40px;
+  height: 40px;
+  border-radius: 100%;
+}
+
+.message-header {
+  width: 100%;
+  display: flex;
+  justify-content: baseline;
+  align-items: end;
+  align-content: end;
+  flex-wrap: wrap;
+  margin-left: 5px;
+}
+
+.message-time.long {
+  max-width: 100%;
+  width: auto;
+  visibility: visible;
+  position: relative;
+  top: 0;
+  margin-left: 0.25rem;
+}
+
+.author-username {
+  margin-right: 0.25rem;
+  font-size: 16px;
+  color: #f2f3f5;
+  font-weight: bold;
+}
+
+.message-wrapper:hover, .message-wrapper.edit {
+  background: #2e3035;
+}
+
+.message-wrapper:hover .message-time {
+  visibility: visible;
+}
+
+.message-body {
+  padding: 2px 0;
+  font-size: 16px;
+  color: #dbdee1;
+  line-height: 1.6;
+  margin-left: 5px;
+
+  overflow-x: hidden;
+  white-space: pre-wrap;
+  overflow-wrap: break-word;
+}
+
+.time-divider {
+  width: 98%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 10px;
+}
+
+.divider-border {
+  width: 100%;
+  border-top: 1px solid #3f4147;
+}
+
+.divider-date {
+  font-size: 10px;
+  font-weight: bold;
+  letter-spacing: 0.02em;
+  padding: 0 5px;
+  color: #949ba4;
+  background: #313338;
+  position: relative;
+  top: -5px;
+}
+
+.first-server-message, .first-channel-message {
+  display: flex;
+  flex-direction: column;
+  width: calc(100% - 20px);
+  margin: 16px;
+  margin-top: auto;
+
+  text-overflow: ellipsis;
+  white-space: pre-wrap;
+  white-space:pre-line;
+}
+
+.first-server-message {
+  padding: 16px 16px 0;
+  justify-content: center;
+  align-items: center;
+}
+
+.first-message-header {
+  font-size: 32px;
+  font-weight: 900;
+  color: #f2f3f5;
+  height: 40px;
+
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.first-message-subtext {
+  font-size: 14px;
+  color: #b5bac1;
+  margin-top: 8px;
+}
+
+.large-channel-icon {
+  width: 68px;
+  height: 68px;
+  border-radius: 100%;
+  background: #41434a;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 16px;;
+}
+
+.first-message-header.channel {
+  margin: 8px 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.first-message-subtext.channel {
+  margin: 0;
+  font-size: 16px;
+  word-break: break-all;
+}
+
+.channel-settings {
+  margin-top: 16px;
+}
+
+.edit-channel-button {
+  background: none;
+  font-size: 16px;
+  padding: 6px;
+  margin: 0;
+  width: 125px;
+  height: 32px;
+  color: #00a8fc;
+  font-weight: normal;
+}
+
+.edit-channel-button:hover {
+  background: #393c41;
+  cursor: pointer;
+}
+
+.edit-channel-button:focus {
+  outline: none;
+}
+
+.edit-button-icon {
+  display: inline;
+  margin-right: 6px;
+}
+
+.message-wrapper.edit .message-time {
+  height: 100%;
+  display: flex;
+  align-items: start;
+  justify-content: center;
+  top: 0;
+  margin-top: 15px;
+}
+
+.message-wrapper.edit .message-details-wrapper {
+  width: 100%;
+}
+
+.message-wrapper.edit .message-time.long {
+  margin-top: 0;
+}
+
+.message-wrapper.edit .message-item-wrapper.simple {
+  align-items: start;
+}
+
+.edited-status {
+  font-size: 0.625rem;
+  color: #949ba4;
+}
+
+.edited-status:hover {
+  cursor: default;
+}
+
+.message-wrapper.delete-preview {
+  margin-top: 0;
+}
+
+.message-wrapper.delete-preview:hover {
+  background: none;
+}
+
+.message-wrapper.delete-preview .message-item-wrapper {
+  padding: 0;
+  max-width: calc(100% - 15px);
+}
+
+.message-wrapper.delete-preview .message-body {
+  font-size: 1rem;
+  line-height: 1.375rem;
+}

@@ -64,9 +64,6 @@ const ChannelSideBar = () => {
       },
       { once: true }
     );
-    // appContainer.classList.remove("show");
-    // dispatch(setShowServerAdminModal(false));
-    // dispatch(setChannelSettingsId(null));
   };
 
   useEffect(() => {

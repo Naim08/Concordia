@@ -31,6 +31,7 @@ import {
 } from "../../store/message";
 import { getCurrentUser } from "../../store/session";
 import MainSideBar from "../mainSideBar";
+import MessageDisplay from "../message";
 import consumer from "../../consumer";
 
 const ServerPage = () => {
@@ -133,11 +134,10 @@ const ServerPage = () => {
     };
   }, [dispatch, channelId]);
 
-  if (!sessionUser) return <Navigate to="/login" />;
-
   return (
     <div className="server-page">
       <MainSideBar />
+      {channelId ? <MessageDisplay /> : null}
     </div>
   );
 };

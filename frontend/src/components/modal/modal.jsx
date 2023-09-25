@@ -156,3 +156,37 @@ export function ActionToolTip({ top, left, onClose, children }) {
     modalNode
   );
 }
+
+export function NavToolTip({ top, left, onClose, children }) {
+  const modalNode = useContext(ModalContext);
+  if (!modalNode) return null;
+
+  return ReactDOM.createPortal(
+    <div
+      className="nav-tooltip"
+      style={{ top: top, left: left }}
+      onMouseEnter={onClose}
+    >
+      {children}
+    </div>,
+    modalNode
+  );
+}
+
+export function TimeToolTip({ top, left, pointerOffset, onClose, children }) {
+  const modalNode = useContext(ModalContext);
+  if (!modalNode) return null;
+  const pointerLeft = `calc(-50% + ${pointerOffset || 0}px)`;
+
+  return ReactDOM.createPortal(
+    <div
+      className="time-tooltip"
+      style={{ top: top, left: left }}
+      onMouseEnter={onClose}
+    >
+      {children}
+      <div className="time-tooltip-pointer" style={{ left: pointerLeft }} />
+    </div>,
+    modalNode
+  );
+}
