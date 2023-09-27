@@ -1,7 +1,9 @@
 import csrfFetch from "./csrf";
 import { addErrors } from "./errors";
 import { unauthorizedSession } from "./session";
+import { createSelector } from "reselect";
 
+const conversationsObjectSelector = (state) => state.entities.conversations;
 export const RECEIVE_CONVERSATION_PARTICIPATION =
   "conversationParticipation/RECEIVE_CONVERSATION_PARTICIPATION";
 export const REMOVE_CONVERSATION_PARTICIPATION =
@@ -53,12 +55,13 @@ const receiveConversationParticipations = (conversationParticipations) => {
   };
 };
 
-export const getConversations = (state) => {
-  return state.entities.conversations
-    ? Object.values(state.entities.conversations).sort((a, b) =>
-        a.updatedAt < b.updatedAt ? 1 : -1
-      )
-    : [];
+export const getConversations = createSelector(
+  [conversationsObjectSelector],
+  (conversationObjects) =>
+    conversationObjects ? Object.values(conversationObjects) : []
+);
+export const getConversation = (id) => (state) => {
+  return state.entities.conversations ? state.entities.conversations[id] : null;
 };
 
 export const createConversationParticipation =
@@ -181,10 +184,14 @@ export const fetchConversation = (conversationId) => async (dispatch) => {
   }
 };
 
-export const createConversation = () => async (dispatch) => {
+export const createConversation = (participantId) => async (dispatch) => {
   try {
     const response = await csrfFetch("/api/conversations", {
       method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ participant_id: participantId }),
     });
 
     if (response.ok) {
@@ -233,8 +240,7 @@ const conversationsReducer = (state = {}, action) => {
     case RECEIVE_CONVERSATIONS:
       return Object.assign({}, action.conversations);
     case RECEIVE_CONVERSATION:
-      const newConversation = action.conversation;
-      return Object.assign({}, state, newConversation);
+      return { ...state, ...action.conversation };
     case REMOVE_CONVERSATION:
       newState = Object.assign({}, state);
       delete newState[action.conversationId];
@@ -268,7 +274,6 @@ export const conversationParticipationReducer = (state = {}, action) => {
     case RECEIVE_CONVERSATION_PARTICIPATIONS:
       return { ...action.conversationParticipations };
     case RECEIVE_CONVERSATIONS:
-      console.log(action);
       for (const key in action.conversations) {
         const conversation = action.conversations[key];
         for (const id in conversation.conversationParticipant) {

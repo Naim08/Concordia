@@ -2,6 +2,7 @@ import "./ServerPage.css";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Navigate, useNavigate, useParams } from "react-router-dom";
+import DirectMessageDisplay from "../directMessage/DirectMessageDisplay";
 
 import {
   addChannel,
@@ -29,6 +30,13 @@ import {
   removeUserMessages,
   resetMessages,
 } from "../../store/message";
+import {
+  receiveDirectMessage,
+  createDirectMessage,
+  deleteDirectMessage,
+  fetchDirectMessages,
+  updateDirectMessage,
+} from "../../store/directMessage";
 import { getCurrentUser } from "../../store/session";
 import MainSideBar from "../mainSideBar";
 import MessageDisplay from "../message";
@@ -40,7 +48,7 @@ const ServerPage = () => {
 
   const sessionUser = useSelector(getCurrentUser);
   const homeRedirect = useSelector(getHomeRedirect);
-  const { serverId, channelId } = useParams();
+  const { serverId, channelId, conversationId } = useParams();
 
   useEffect(() => {
     if (homeRedirect) navigate(`/home`);
@@ -134,10 +142,49 @@ const ServerPage = () => {
     };
   }, [dispatch, channelId]);
 
+  useEffect(() => {
+    const subscription = consumer.subscriptions.create(
+      { channel: "ConversationsChannel", id: conversationId },
+      {
+        received: ({ type, message, id, direct_message }) => {
+          switch (type) {
+            case "NEW_DIRECT_MESSAGE":
+              const listEle = document.querySelector(".messages-list");
+              const atBottom =
+                listEle &&
+                Math.round(listEle.scrollHeight - listEle.scrollTop) <=
+                  listEle.clientHeight;
+              console.log(message);
+              dispatch(receiveDirectMessage(message));
+
+              if (message.author.id === sessionUser.id || atBottom)
+                dispatch(setScroll(true));
+              break;
+            case "DESTROY_MESSAGE":
+              dispatch(deleteDirectMessage(id));
+              break;
+            case "UPDATE_MESSAGE":
+              dispatch(updateDirectMessage(message));
+              break;
+            default:
+            // console.log("unknown broadcast type");
+          }
+        },
+      }
+    );
+
+    return () => {
+      subscription?.unsubscribe();
+      dispatch(resetMessages());
+      dispatch(setScroll(true));
+    };
+  }, [dispatch, conversationId]);
+
   return (
     <div className="server-page">
       <MainSideBar />
       {channelId ? <MessageDisplay /> : null}
+      {conversationId ? <DirectMessageDisplay /> : null}
     </div>
   );
 };

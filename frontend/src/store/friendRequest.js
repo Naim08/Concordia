@@ -3,7 +3,9 @@ import { addErrors } from "./errors";
 import { addFriend } from "./friend";
 import { unauthorizedSession } from "./session";
 import { setAddFriendResult } from "./ui";
+import { createSelector } from "reselect";
 
+const friendRequestsObjectSelector = (state) => state.entities.friendRequests;
 const RESET_FRIEND_REQUESTS = "friendRequests/resetFriendRequests";
 const SET_FRIEND_REQUESTS = "friendRequests/setFriendRequests";
 const ADD_SENT_REQUEST = "friendRequests/addSentRequest";

@@ -35,6 +35,7 @@ const ConvoListItem = ({
       prevStatus.current = status;
 
       const listItem = document.getElementById(`friend-${userId}`);
+      listItem.classList.add("shrink");
       if (status === "Offline" && selectedTab === "friends-all") {
         listItem.classList.remove("animate");
       } else if (status === "Offline" && selectedTab === "friends-online") {

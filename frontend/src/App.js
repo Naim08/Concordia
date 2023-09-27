@@ -13,6 +13,7 @@ import ServerSideBar from "./components/server/serverSideBar";
 import NotFound from "./components/404/notFound";
 import ServerPage from "./components/server";
 import MessageDisplay from "./components/message";
+import DirectMessageDisplay from "./components/directMessage/DirectMessageDisplay";
 
 function App() {
   return (
@@ -43,7 +44,6 @@ function App() {
             index
             element={
               <>
-                {" "}
                 <ServerSideBar />
                 <ServerPage />
               </>
@@ -61,9 +61,17 @@ function App() {
             }
           />
         </Route>
-        <Route path="/conversations" element={<ProtectedRoute />}>
+        {/* <Route path="/conversations" element={<ProtectedRoute />}>
           <Route
             index
+            element={
+              <>
+ DirectMessageDisplay
+              </>
+            }
+          />
+          <Route
+            path=":conversationId"
             element={
               <>
                 {" "}
@@ -72,6 +80,9 @@ function App() {
               </>
             }
           />
+        </Route> */}
+        <Route path="/conversations" element={<ProtectedRoute />}>
+          <Route index element={<></>} />
           <Route
             path=":conversationId"
             element={

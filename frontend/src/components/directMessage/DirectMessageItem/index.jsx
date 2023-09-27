@@ -1,22 +1,24 @@
-import "./MessageItem.css";
+import "../../message/MessageList/MessageItem/MessageItem.css";
 import { useState } from "react";
 import { useSelector } from "react-redux";
-import { TimeToolTip } from "../../../modal/modal";
-import { getEditMessageId } from "../../../../store/ui";
-import EditMessageInput from "./EditMessageForms/EditMessageForm";
-import MessageEditOptions from "./EditOptions";
-import EditStatus from "./EditMessage";
+import { TimeToolTip } from "../../modal/modal";
+import { getEditMessageId } from "../../../store/ui";
+import DirectEditMessageInput from "../EditDirectMessageInput/EditForm";
+import DirectEditStatus from "../DirectEditMessage";
+import DirectMessageEditOptions from "../EditDirectMessageInput/EditOptions";
+import { getCurrentUser } from "../../../store/session";
 
-const MessageItem = ({
+const DirectMessageItem = ({
   message,
   user,
   date,
   extraTimeInfo,
   sessionId,
   editDisabled,
+  participant,
 }) => {
   const editMessageId = useSelector(getEditMessageId);
-
+  const currentUser = message.author;
   const shortTime = date.toLocaleString("en-us", {
     hour: "numeric",
     minute: "numeric",
@@ -56,8 +58,7 @@ const MessageItem = ({
     setShowModal(false);
   };
 
-  if (!user || !message) return null;
-  console.log(message);
+  if (!currentUser || !message) return null;
   return (
     <div
       className={`message-wrapper ${
@@ -67,7 +68,7 @@ const MessageItem = ({
       {sessionId === message.authorId &&
       message.id !== editMessageId &&
       !editDisabled ? (
-        <MessageEditOptions
+        <DirectMessageEditOptions
           messageId={message.id}
           message={message}
           date={date}
@@ -79,13 +80,15 @@ const MessageItem = ({
         <div className="profile-pic-wrapper">
           <img
             className="message-profile-pic"
-            src={user.profilePictureUrl}
+            src={currentUser.profilePictureUrl}
             alt=""
           />
         </div>
         <div className="message-details-wrapper">
           <h3 className="message-header">
-            <div className="author-username">{user.username.split("#")[0]}</div>
+            <div className="author-username">
+              {currentUser.username.split("#")[0]}
+            </div>
             <div
               className="message-time long"
               onMouseOver={showHandler(message.id)}
@@ -106,12 +109,12 @@ const MessageItem = ({
           </h3>
 
           {message.id === editMessageId ? (
-            <EditMessageInput message={message} />
+            <DirectEditMessageInput message={message} />
           ) : (
             <div className="message-body">
-              {message.body}
+              {message.content}
               {message.updatedAt !== message.createdAt ? (
-                <EditStatus
+                <DirectEditStatus
                   updateTime={message.updatedAt}
                   messageId={message.id}
                 />
@@ -126,4 +129,4 @@ const MessageItem = ({
   );
 };
 
-export default MessageItem;
+export default DirectMessageItem;

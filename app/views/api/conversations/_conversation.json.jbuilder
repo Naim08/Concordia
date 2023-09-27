@@ -11,7 +11,9 @@ end
 json.direct_messages do
   conversation.direct_messages.each do |direct_message|
     json.set! direct_message.id do
-      json.partial! "api/direct_messages/direct_message", direct_message: direct_message
+      json.extract! direct_message, :id, :conversation_id, :content, :created_at, :updated_at
+      json.author direct_message.author
+      json.authorId direct_message.author.id
     end
   end
 end

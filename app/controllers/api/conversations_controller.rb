@@ -19,18 +19,43 @@ class Api::ConversationsController < ApplicationController
   def show
     @conversation = Conversation.includes(:direct_messages).find(params[:id])
     @current_user = current_user
+    @direct_messages = @conversation.direct_messages
+    @participants = @conversation.participants
     render :show
   end
 
+  # def create
+  #   @conversation = Conversation.includes(:direct_messages).new()
+  #   @current_user = current_user
+  #   @conversation.owner_id = @current_user.id
+  #   if @conversation.save
+  #     render :show
+  #   else
+  #     render json: @conversation.errors.full_messages, status: 422
+  #   end
+  # end
   def create
     @conversation = Conversation.includes(:direct_messages).new()
     @current_user = current_user
+    target_user = User.find(params[:participant_id])
+    existing_conversation = @current_user.conversations & target_user.conversations
+
+    # if existing_conversation.any?
+    #   @conversation = existing_conversation.first
+    # else
     @conversation.owner_id = @current_user.id
     if @conversation.save
-      render :show
-    else
-      render json: @conversation.errors.full_messages, status: 422
+      ConversationParticipant.create(conversation: @conversation, participant: target_user)
+      ConversationParticipant.create(conversation: @conversation, participant: @current_user)
+      UsersChannel.broadcast_to(
+        target_user,
+        type: "ADD_CONVERSATION",
+        **from_template("api/conversation_participants/show"),
+      )
     end
+    #  end
+
+    render :show
   end
 
   def destroy

@@ -26,6 +26,10 @@ import {
   removeServer,
   resetServers,
 } from "../../store/server";
+import {
+  createConversation,
+  deleteConversation,
+} from "../../store/conversation";
 
 import { ServerFormModal, ServerToolTip } from "../modal/modal";
 import ServerForms from "./serverForms";
@@ -61,7 +65,7 @@ const ServerSideBar = () => {
     const subscription = consumer.subscriptions.create(
       { channel: "UsersChannel" },
       {
-        received: ({ type, server, id }) => {
+        received: ({ type, server, id, message }) => {
           switch (type) {
             // add direct message notifications here later
             case "UPDATE_SERVER":
@@ -71,8 +75,20 @@ const ServerSideBar = () => {
               dispatch(removeServer(id));
               dispatch(setDeletedServerId(id));
               break;
+
+            case "ADD_CONVERSATION":
+              console.log("add conversation");
+              dispatch(createConversation({ conversation: server }));
+              break;
+            case "DELETE_CONVERSATION":
+              dispatch(deleteConversation(data.conversationId));
+              break;
+            case "NEW_DIRECT_MESSAGE":
+              console.log(message);
+              break;
             default:
-            // console.log("unknown broadcast type");
+              // console.log("unknown broadcast type");
+              break;
           }
         },
       }

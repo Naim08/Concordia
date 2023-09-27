@@ -26,72 +26,44 @@ const ConversationsList = () => {
     // Load all conversations on component mount
     dispatch(fetchConversations());
 
-    const subscription = consumer.subscriptions.create(
-      { channel: "UsersChannel" },
-      {
-        received: ({ type, participant, id }) => {
-          switch (type) {
-            // add direct message notifications here later
-            case "ADD_CONVERSATION":
-              console.log("works");
-              // dispatch(createConversation(server));
-              break;
-            case "DELETE_SERVER":
-              dispatch(deleteConversation(id));
-              break;
-            default:
-            // console.log("unknown broadcast type");
-          }
-        },
-      }
+    //filter and onnly keep conversations with unique convo.participant.id
+
+    // const subscription = consumer.subscriptions.create(
+    //   { channel: "UsersChannel" },
+    //   {
+    //     received: ({ type, participant, id }) => {
+    //       switch (type) {
+    //         // add direct message notifications here later
+    //         case "ADD_CONVERSATION":
+    //           console.log("works");
+    //           // dispatch(createConversation(server));
+    //           break;
+    //         case "DELETE_SERVER":
+    //           dispatch(deleteConversation(id));
+    //           break;
+    //         default:
+    //         // console.log("unknown broadcast type");
+    //       }
+    //     },
+    //   }
+    // );
+
+    // return () => {
+    //   subscription?.unsubscribe();
+    // };
+  }, []);
+
+  const uniqueConvos = convos.filter((convo, index) => {
+    return (
+      convos.findIndex((convo2) => {
+        return convo.participant.id === convo2.participant.id;
+      }) === index
     );
-
-    return () => {
-      subscription?.unsubscribe();
-    };
-  }, [dispatch]);
-
-  useEffect(() => {
-    const conversationChannel = consumer.subscriptions.create(
-      { channel: "ConversationsChannel", id: conversationId },
-      {
-        received: (data) => {
-          switch (data.type) {
-            case "RECEIVE_DIRECT_MESSAGE":
-              setMessages((prevMessages) => [
-                ...prevMessages,
-                data.direct_message,
-              ]);
-              break;
-            case "UPDATE_DIRECT_MESSAGE":
-              setMessages((prevMessages) => [
-                ...prevMessages,
-                data.direct_message,
-              ]);
-              break;
-            case "DELETE_DIRECT_MESSAGE":
-              setMessages((prevMessages) => [
-                ...prevMessages,
-                data.direct_message,
-              ]);
-              break;
-
-            // Handle other types of data if necessary
-            default:
-              console.log("Unknown event type:", data.type);
-          }
-        },
-      }
-    );
-
-    return () => {
-      conversationChannel.unsubscribe();
-    };
-  }, [dispatch, conversationId]);
+  });
 
   return (
     <>
-      {convos.map((convo) => {
+      {uniqueConvos.map((convo) => {
         return (
           <ConvoListItem
             userId={convo.participant.id}
