@@ -181,7 +181,7 @@ class User < ApplicationRecord
 
   def generate_default_pic
     # Check if a profile_picture is already attached
-    return if photo.attached?
+    return if self.profile_picture_url
 
     # Generate a random avatar URL using Faker
     avatar_url = Faker::Avatar.image

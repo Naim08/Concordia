@@ -14,6 +14,7 @@ import NotFound from "./components/404/notFound";
 import ServerPage from "./components/server";
 import MessageDisplay from "./components/message";
 import DirectMessageDisplay from "./components/directMessage/DirectMessageDisplay";
+import Voice from "./components/Voice";
 
 function App() {
   return (
@@ -90,6 +91,19 @@ function App() {
                 {" "}
                 <ServerSideBar />
                 <ServerPage />
+              </>
+            }
+          />
+        </Route>
+        <Route path="/voice" element={<ProtectedRoute />}>
+          <Route
+            index
+            element={
+              <>
+                {" "}
+                <ServerSideBar />
+                <ServerPage />
+                <Voice />
               </>
             }
           />

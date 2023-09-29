@@ -74,7 +74,7 @@ const ConversationIndexList = ({ id, image, name, isServer = true }) => {
         <span className="tab-selector" />
       </div>
 
-      {showModal && currentModal === id && isServer && (
+      {showModal && currentModal === id && (
         <ServerToolTip top={top} onClose={() => setShowModal(false)}>
           <span className="tooltip">{name}</span>
         </ServerToolTip>

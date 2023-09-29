@@ -15,7 +15,6 @@ const DirectMessageItem = ({
   extraTimeInfo,
   sessionId,
   editDisabled,
-  participant,
 }) => {
   const editMessageId = useSelector(getEditMessageId);
   const currentUser = message.author;

@@ -3,6 +3,7 @@ import { unauthorizedSession } from "./session";
 import { addErrors } from "./errors";
 import { setNewServer } from "./ui";
 import { createSelector } from "reselect";
+import { Navigate } from "react-router-dom";
 
 const serversObjectSelector = (state) => state.entities.servers;
 const RESET_SERVERS = "servers/resetServers";
@@ -99,7 +100,7 @@ export const deleteServer = (serverId) => async (dispatch) => {
     const response = await csrfFetch(`/api/servers/${serverId}`, {
       method: "DELETE",
     });
-
+    // dispatch(removeServer(serverId));
     return response;
   } catch (res) {
     if (res.status === 401) dispatch(unauthorizedSession());

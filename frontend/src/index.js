@@ -1,4 +1,4 @@
-import React from "react";
+import React, { StrictMode } from "react";
 import "./index.css";
 import App from "./App";
 import configureStore from "./store";
@@ -15,7 +15,7 @@ const store = configureStore();
 
 function Root() {
   return (
-    <React.StrictMode>
+    <StrictMode>
       <ModalProvider>
         <Provider store={store}>
           <BrowserRouter>
@@ -23,7 +23,7 @@ function Root() {
           </BrowserRouter>
         </Provider>
       </ModalProvider>
-    </React.StrictMode>
+    </StrictMode>
   );
 }
 function renderApp() {

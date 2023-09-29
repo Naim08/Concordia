@@ -9,8 +9,11 @@ import {
 import { ActionToolTip, ServerFormModal } from "../../modal/modal";
 import { setServerFormSlide } from "../../../store/ui";
 import DeleteFriendForm from "./DeleteFriend";
+import { createConversation } from "../../../store/conversation";
+import { useNavigate } from "react-router-dom";
 
 const ActionIcon = ({ actionType, itemId, name }) => {
+  const nagivate = useNavigate();
   const [showModal, setShowModal] = useState(false);
   const [top, setTop] = useState(0);
   const [left, setLeft] = useState(0);
@@ -65,6 +68,11 @@ const ActionIcon = ({ actionType, itemId, name }) => {
   const cancelRequestHandler = (e) => {
     e.preventDefault();
     dispatch(cancelSentRequest(itemId));
+  };
+
+  const messageHandler = (e) => {
+    e.preventDefault();
+    dispatch(createConversation(itemId));
   };
 
   const messageIcon = (
@@ -129,7 +137,7 @@ const ActionIcon = ({ actionType, itemId, name }) => {
     case "message":
       icon = messageIcon;
       tooltipText = "Message";
-      clickHandler = null; // replace when direct messaging implemented
+      clickHandler = messageHandler;
       leftOffset = 17;
       break;
     case "deleteFriend":
@@ -164,11 +172,9 @@ const ActionIcon = ({ actionType, itemId, name }) => {
   }
 
   return (
-    <div className={`${actionType === "message" ? "disabled-hover" : ""}`}>
+    <div className={`${actionType === "message" ? "" : ""}`}>
       <div
-        className={`friend-item-action ${
-          actionType === "message" ? "disabled" : ""
-        }`}
+        className={`friend-item-action`}
         onClick={clickHandler}
         onMouseEnter={showHandler(itemId)}
         onMouseLeave={leaveHandler}

@@ -36,6 +36,7 @@ import {
   deleteDirectMessage,
   fetchDirectMessages,
   updateDirectMessage,
+  resetDirectMessages,
 } from "../../store/directMessage";
 import { getCurrentUser } from "../../store/session";
 import MainSideBar from "../mainSideBar";
@@ -105,7 +106,7 @@ const ServerPage = () => {
       dispatch(fetchMessages(channelId));
     }
 
-    const subscription = consumer.subscriptions.create(
+    const messageSubscription = consumer.subscriptions.create(
       { channel: "MessagesChannel", id: channelId },
       {
         received: ({ type, message, id }) => {
@@ -136,14 +137,14 @@ const ServerPage = () => {
     );
 
     return () => {
-      subscription?.unsubscribe();
+      messageSubscription?.unsubscribe();
       dispatch(resetMessages());
       dispatch(setScroll(true));
     };
   }, [dispatch, channelId]);
 
   useEffect(() => {
-    const subscription = consumer.subscriptions.create(
+    const convoSubscription = consumer.subscriptions.create(
       { channel: "ConversationsChannel", id: conversationId },
       {
         received: ({ type, message, id, direct_message }) => {
@@ -160,10 +161,10 @@ const ServerPage = () => {
               if (message.author.id === sessionUser.id || atBottom)
                 dispatch(setScroll(true));
               break;
-            case "DESTROY_MESSAGE":
+            case "DESTROY_DIRECT_MESSAGE":
               dispatch(deleteDirectMessage(id));
               break;
-            case "UPDATE_MESSAGE":
+            case "UPDATE_DIRECT_MESSAGE":
               dispatch(updateDirectMessage(message));
               break;
             default:
@@ -174,8 +175,8 @@ const ServerPage = () => {
     );
 
     return () => {
-      subscription?.unsubscribe();
-      dispatch(resetMessages());
+      convoSubscription?.unsubscribe();
+      dispatch(resetDirectMessages());
       dispatch(setScroll(true));
     };
   }, [dispatch, conversationId]);

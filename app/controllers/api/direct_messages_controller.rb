@@ -2,8 +2,9 @@ class Api::DirectMessagesController < ApplicationController
   before_action :require_logged_in
 
   def show
-    @direct_message = Conversation.find(params[:id]).direct_messages
-    render :show
+    @direct_messages = User.find(current_user.id).conversations.find(params[:id]).direct_messages
+
+    render :index
   end
 
   def index

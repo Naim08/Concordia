@@ -3,7 +3,9 @@ import { addErrors } from "./errors";
 import { addServer } from "./server";
 import { unauthorizedSession } from "./session";
 import { setNewServer } from "./ui";
+import { createSelector } from "reselect";
 
+const membersObjectSelector = (state) => state.entities.members;
 const RESET_MEMBERS = "members/resetMembers";
 const SET_MEMBERS = "members/setMembers";
 const ADD_MEMBER = "members/addMember";
@@ -28,13 +30,15 @@ export const removeMember = (userId) => ({
   userId,
 });
 
-export const getMembers = (state) => {
-  return state.entities.members
-    ? Object.values(state.entities.members).sort((a, b) =>
-        a.username > b.username ? 1 : -1
-      )
-    : [];
-};
+export const getMembers = createSelector(
+  [membersObjectSelector],
+  (membersObject) =>
+    membersObject
+      ? Object.values(membersObject).sort((a, b) =>
+          a.username > b.username ? 1 : -1
+        )
+      : []
+);
 
 export const getMemberId = (userId) => (state) => {
   return state.entities.members && state.entities.members[userId]
@@ -42,9 +46,10 @@ export const getMemberId = (userId) => (state) => {
     : null;
 };
 
-export const getMembersObject = (state) => {
-  return state.entities.members ? state.entities.members : {};
-};
+export const getMembersObject = createSelector(
+  [membersObjectSelector],
+  (membersObject) => membersObject || {}
+);
 
 export const getMember = (id) => (state) => {
   return state.entities.members ? state.entities.members[id] : null;

@@ -37,6 +37,9 @@ const SET_QUICK_DELETE = "ui/setQuickDelete";
 const SET_CHANNEL_SETTINGS_ID = "ui/setChannelSettingsId";
 const SET_NEW_SERVER = "ui/setNewServer";
 const SET_NEW_CHANNEL = "ui/setNewChannel";
+const SET_NEW_CONVERSATION_ID = "ui/setNewConversationId";
+
+const SET_VIDEO_CALL = "ui/setVideoCall";
 
 export const resetUi = () => ({
   type: RESET_UI,
@@ -112,6 +115,11 @@ export const setNewChannel = (channelId) => ({
   channelId,
 });
 
+export const setNewConversationId = (conversationId) => ({
+  type: SET_NEW_CONVERSATION_ID,
+  conversationId,
+});
+
 export const setFriendSearch = (toggle) => ({
   type: SET_FRIEND_SEARCH,
   toggle,
@@ -166,6 +174,15 @@ export const setBackground = (toggle) => ({
   type: SET_BACKGROUND,
   toggle,
 });
+
+export const setVideoCall = (toggle) => ({
+  type: SET_VIDEO_CALL,
+  toggle,
+});
+
+export const getVideoCall = (state) => {
+  return state.ui.video.isVideo;
+};
 export const getUnauthorized = (state) => {
   return state.ui.auth.unauthorized;
 };
@@ -220,6 +237,10 @@ export const getNewServer = (state) => {
 
 export const getNewChannel = (state) => {
   return state.ui.editDelete.newChannel;
+};
+
+export const getNewConversationId = (state) => {
+  return state.ui.editDelete.newConversationId;
 };
 
 export const getFriendSearch = (state) => {
@@ -393,6 +414,7 @@ const editDeleteInitialState = {
   channelSettingsId: null,
   newServer: null,
   newChannel: null,
+  newConversationId: null,
 };
 
 const editDeleteUiReducer = (state = editDeleteInitialState, action) => {
@@ -414,6 +436,25 @@ const editDeleteUiReducer = (state = editDeleteInitialState, action) => {
       return { ...state, newServer: action.serverId };
     case SET_NEW_CHANNEL:
       return { ...state, newChannel: action.channelId };
+    case SET_NEW_CONVERSATION_ID:
+      return { ...state, newConversationId: action.conversationId };
+
+    default:
+      return state;
+  }
+};
+
+const videoInitialState = {
+  isVideo: false,
+};
+
+const videoUiReducer = (state = videoInitialState, action) => {
+  Object.freeze(state);
+  switch (action.type) {
+    case RESET_UI:
+      return videoInitialState;
+    case SET_VIDEO_CALL:
+      return { ...state, isVideo: action.toggle };
     default:
       return state;
   }
@@ -426,6 +467,7 @@ const uiReducer = combineReducers({
   form: formUiReducer,
   animation: animationUiReducer,
   editDelete: editDeleteUiReducer,
+  video: videoUiReducer,
 });
 
 export default uiReducer;

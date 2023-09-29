@@ -61,7 +61,6 @@ const CreateServerForm = () => {
     e.preventDefault();
     if (!e.target.files[0]) return;
     setPicture(e.target.files[0]);
-    console.log(picture);
   };
 
   const dispatch = useDispatch();

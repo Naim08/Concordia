@@ -42,14 +42,17 @@ export const removeReceivedRequest = (requestId) => ({
   requestId,
 });
 
-export const getFriendRequests = (state) => {
-  return state.entities.friendRequests
-    ? [
-        Object.values(state.entities.friendRequests.sent),
-        Object.values(state.entities.friendRequests.received),
-      ]
-    : [[], []];
-};
+export const getFriendRequests = createSelector(
+  [friendRequestsObjectSelector],
+  (friendRequests) => {
+    return friendRequests
+      ? [
+          Object.values(friendRequests.sent),
+          Object.values(friendRequests.received),
+        ]
+      : [[], []];
+  }
+);
 
 export const fetchFriendRequests = () => async (dispatch) => {
   try {

@@ -2,6 +2,7 @@ import csrfFetch from "./csrf";
 import { addErrors } from "./errors";
 import { unauthorizedSession } from "./session";
 import { createSelector } from "reselect";
+import { setNewConversationId } from "./ui";
 
 const conversationsObjectSelector = (state) => state.entities.conversations;
 export const RECEIVE_CONVERSATION_PARTICIPATION =
@@ -21,14 +22,14 @@ const receiveConversations = (conversations) => {
   };
 };
 
-const receiveConversation = (conversation) => {
+export const receiveConversation = (conversation) => {
   return {
     type: RECEIVE_CONVERSATION,
     conversation: conversation,
   };
 };
 
-const removeConversation = (conversationId) => {
+export const removeConversation = (conversationId) => {
   return {
     type: REMOVE_CONVERSATION,
     conversationId: conversationId,
@@ -196,7 +197,9 @@ export const createConversation = (participantId) => async (dispatch) => {
 
     if (response.ok) {
       const conversation = await response.json();
+
       dispatch(receiveConversation(conversation));
+      dispatch(setNewConversationId(Object.keys(conversation)[0]));
     } else {
       if (response.status === 401) {
         dispatch(unauthorizedSession());

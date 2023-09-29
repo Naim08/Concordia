@@ -112,13 +112,16 @@ const ConvoListItem = ({
       id={`friend-${userId}`}
       data-key={conversationId}
       className={`friend-list-item ${selectedTab} ${getStatusClass()} ${getAnimationStatus()}`}
-      onAnimationEnd={setDisplay}
       onClick={toggleSelected}
       onMouseEnter={showHandler(conversationId)}
       onMouseLeave={leaveHandler}
       onWheel={leaveHandler}
     >
-      <div className={`friend-item-display ${checkSelected(conversationId)}`}>
+      <div
+        className={`friend-item-display ${checkSelected(
+          conversationId
+        )} conversation-list-item`}
+      >
         <UserIcon picture={picture} status={status} name={username} />
         <div className="friend-item-details">
           <div className="friend-item-name-wrapper">
@@ -131,6 +134,9 @@ const ConvoListItem = ({
               <span className="status">
                 {customStatus ? customStatus : status}
               </span>
+              <div className="video-call-icon">
+                <i className="fa-sharp fa-solid fa-video"></i>
+              </div>
             </div>
           ) : (
             <div className="friend-request-message">

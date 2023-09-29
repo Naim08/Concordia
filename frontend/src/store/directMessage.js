@@ -8,6 +8,7 @@ const directMessageObjectSelector = (state) => state.entities.directMessages;
 export const RECEIVE_DIRECT_MESSAGE = "directMessage/RECEIVE_DIRECT_MESSAGE";
 export const RECEIVE_DIRECT_MESSAGES = "directMessage/RECEIVE_DIRECT_MESSAGES";
 export const REMOVE_DIRECT_MESSAGE = "directMessage/REMOVE_DIRECT_MESSAGE";
+export const RESET_DIRECT_MESSAGES = "directMessage/RESET_DIRECT_MESSAGES";
 
 export const receiveDirectMessage = (directMessage) => {
   return {
@@ -27,6 +28,12 @@ const receiveDirectMessages = (directMessages) => {
   return {
     type: RECEIVE_DIRECT_MESSAGES,
     directMessages: directMessages,
+  };
+};
+
+export const resetDirectMessages = () => {
+  return {
+    type: RESET_DIRECT_MESSAGES,
   };
 };
 
@@ -149,11 +156,13 @@ export const deleteDirectMessage = (directMessageId) => async (dispatch) => {
   }
 };
 
-const directMessagesReducer = (state = {}, action) => {
+const directMessagesReducer = (state = null, action) => {
   Object.freeze(state);
 
   let newState;
   switch (action.type) {
+    case RESET_DIRECT_MESSAGES:
+      return null;
     case RECEIVE_DIRECT_MESSAGE:
       newState = Object.assign({}, state);
       newState[action.directMessage.id] = action.directMessage;

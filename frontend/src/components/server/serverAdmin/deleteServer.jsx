@@ -1,6 +1,7 @@
 import { useDispatch } from "react-redux";
 import { deleteServer } from "../../../store/server";
 import { deleteChannel } from "../../../store/channel";
+import { setDeletedServerId, setHomeRedirect } from "../../../store/ui";
 import "./delete.css";
 
 const DeleteForm = ({ serverInfo, channelInfo, onClose, adminClose }) => {
@@ -13,11 +14,15 @@ const DeleteForm = ({ serverInfo, channelInfo, onClose, adminClose }) => {
 
   const handleDelete = (e) => {
     e.preventDefault();
+    console.log("channelInfo", channelInfo);
+    console.log("serverInfo", serverInfo);
     onClose();
     adminClose();
-    channelInfo
-      ? dispatch(deleteChannel(channelInfo.id))
-      : dispatch(deleteServer(serverInfo.id));
+    if (channelInfo) {
+      dispatch(deleteChannel(channelInfo.id));
+    } else {
+      dispatch(deleteServer(serverInfo.id));
+    }
   };
 
   return (

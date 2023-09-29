@@ -44,15 +44,16 @@ class Api::ServersController < ApplicationController
 
   def destroy
     @server = Server.find(params[:id])
-
+    @members = @server.members.pluck(:id)
     if @server.destroy
-      @server.members.each do |member|
+      User.where(id: @members).each do |member|
         UsersChannel.broadcast_to(
           member,
           type: "DELETE_SERVER",
           id: @server.id,
         )
       end
+
       head :no_content
     else
       render json: { errors: @server.errors }, status: :unprocessable_entity

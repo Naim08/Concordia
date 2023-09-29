@@ -11,11 +11,14 @@
 class Conversation < ApplicationRecord
   # Associations
   belongs_to :owner, foreign_key: :owner_id, class_name: :User
-  has_many :conversation_participants, foreign_key: :conversation_id, class_name: :ConversationParticipant
-  has_many :participants, through: :conversation_participants, source: :participant
-  has_many :direct_messages, foreign_key: :conversation_id, class_name: :DirectMessage
+  belongs_to :participant, foreign_key: :participant_id, class_name: :User
+  has_many :conversation_participants, foreign_key: :conversation_id, class_name: :ConversationParticipant, dependent: :destroy
+  has_many :participants, through: :conversation_participants, source: :participant, dependent: :destroy
+  has_many :direct_messages, foreign_key: :conversation_id, class_name: :DirectMessage, dependent: :destroy
+
   # Validations (if needed)
   validates :owner_id, presence: true
+  validates :participant_id, presence: true
   before_validation :set_random_name, if: -> { name.blank? }
 
   private

@@ -2,6 +2,7 @@ import csrfFetch from "./csrf";
 import { unauthorizedSession } from "./session";
 import { createSelector } from "reselect";
 
+const friendsObjectSelector = (state) => state.entities.friends;
 const RESET_FRIENDS = "friends/resetFriends";
 const SET_FRIENDS = "friends/setFriends";
 const ADD_FRIEND = "friends/addFriend";
@@ -26,13 +27,11 @@ export const removeFriend = (friendshipId) => ({
   friendshipId,
 });
 
-export const getFriends = (state) => {
-  return state.entities.friends
-    ? Object.values(state.entities.friends).sort((a, b) =>
-        a.username > b.username ? 1 : -1
-      )
+export const getFriends = createSelector([friendsObjectSelector], (friends) => {
+  return friends
+    ? Object.values(friends).sort((a, b) => (a.username > b.username ? 1 : -1))
     : [];
-};
+});
 
 export const fetchFriends = () => async (dispatch) => {
   try {

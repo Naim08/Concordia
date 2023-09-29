@@ -4,15 +4,8 @@ class Api::ConversationsController < ApplicationController
   def index
     @current_user = current_user
 
-    owned_ids = @current_user.owned_conversations.ids
-    participated_ids = @current_user.conversations.ids
-
-    all_conversation_ids = owned_ids + participated_ids
-
-    @conversations = Conversation.where(id: all_conversation_ids.uniq)
-                                 .includes(:participants)
-                                 .select { |conversation| conversation.participants.count > 1 }
-
+    ## owner_id or participant_id is current_user.id
+    @conversations = Conversation.includes(:direct_messages).where(owner_id: @current_user.id).or(Conversation.includes(:direct_messages).where(participant_id: @current_user.id))
     render :index
   end
 
@@ -35,22 +28,21 @@ class Api::ConversationsController < ApplicationController
   #   end
   # end
   def create
-    @conversation = Conversation.includes(:direct_messages).new()
+    @conversation = Conversation.new(owner_id: current_user.id, participant_id: params[:participant_id])
     @current_user = current_user
     target_user = User.find(params[:participant_id])
-    existing_conversation = @current_user.conversations & target_user.conversations
 
     # if existing_conversation.any?
     #   @conversation = existing_conversation.first
     # else
-    @conversation.owner_id = @current_user.id
     if @conversation.save
       ConversationParticipant.create(conversation: @conversation, participant: target_user)
       ConversationParticipant.create(conversation: @conversation, participant: @current_user)
+
       UsersChannel.broadcast_to(
         target_user,
         type: "ADD_CONVERSATION",
-        **from_template("api/conversation_participants/show"),
+        **from_template("api/conversations/create", conversation: @conversation),
       )
     end
     #  end
@@ -60,7 +52,13 @@ class Api::ConversationsController < ApplicationController
 
   def destroy
     @conversation = Conversation.includes(:direct_messages).find(params[:id])
+    ConversationParticipant.where(conversation_id: @conversation.id).destroy_all
     if @conversation.destroy
+      UsersChannel.broadcast_to(
+        @conversation.participant,
+        type: "DELETE_CONVERSATION",
+        id: @conversation.id,
+      )
       render :show
     else
       render json: @conversation.errors.full_messages, status: 422

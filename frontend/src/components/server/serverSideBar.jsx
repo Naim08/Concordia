@@ -1,6 +1,11 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useLocation, useParams, useNavigate } from "react-router-dom";
+import {
+  useLocation,
+  useParams,
+  useNavigate,
+  Navigate,
+} from "react-router-dom";
 import {
   getDeletedChannelId,
   getDeletedServerId,
@@ -27,8 +32,9 @@ import {
   resetServers,
 } from "../../store/server";
 import {
-  createConversation,
-  deleteConversation,
+  getConversation,
+  receiveConversation,
+  removeConversation,
 } from "../../store/conversation";
 
 import { ServerFormModal, ServerToolTip } from "../modal/modal";
@@ -60,31 +66,27 @@ const ServerSideBar = () => {
       : "#299e1a";
 
   useEffect(() => {
-    dispatch(fetchServers());
+    if (servers) dispatch(fetchServers());
 
     const subscription = consumer.subscriptions.create(
       { channel: "UsersChannel" },
       {
-        received: ({ type, server, id, message }) => {
+        received: ({ type, server, id, conversation }) => {
           switch (type) {
-            // add direct message notifications here later
             case "UPDATE_SERVER":
               dispatch(addServer(server));
               break;
             case "DELETE_SERVER":
+              console.log(type, id);
               dispatch(removeServer(id));
               dispatch(setDeletedServerId(id));
               break;
-
             case "ADD_CONVERSATION":
-              console.log("add conversation");
-              dispatch(createConversation({ conversation: server }));
+              console.log(type, conversation, id);
+              dispatch(receiveConversation(conversation));
               break;
             case "DELETE_CONVERSATION":
-              dispatch(deleteConversation(data.conversationId));
-              break;
-            case "NEW_DIRECT_MESSAGE":
-              console.log(message);
+              dispatch(removeConversation(id));
               break;
             default:
               // console.log("unknown broadcast type");
@@ -115,8 +117,9 @@ const ServerSideBar = () => {
   }, [newChannelId]);
 
   useEffect(() => {
+    console.log(serverId, deletedServerId);
     if (deletedServerId) {
-      if (serverId === deletedServerId.toString()) navigate("/home");
+      if (serverId === deletedServerId.toString()) navigate(`/home`);
       dispatch(setDeletedServerId(null));
     }
   }, [deletedServerId]);
@@ -130,6 +133,7 @@ const ServerSideBar = () => {
   }, [deletedChannelId]);
 
   const toggleSelected = (e) => {
+    console.log(e.target.dataset.key);
     if (e.target.dataset.key) {
       if (e.target.dataset.key === "home") navigate(`/home`);
       else if (e.target.dataset.key === "add-server") return;
@@ -301,11 +305,11 @@ const ServerSideBar = () => {
           </ServerToolTip>
         )}
       </div>
-      {showJoinServerModal && (
+      {/* {showJoinServerModal && (
         <ServerFormModal onClose={closeForm}>
           <ServerForms />
         </ServerFormModal>
-      )}
+      )} */}
     </div>
   );
 };

@@ -13,7 +13,7 @@
 #  updated_at   :datetime         not null
 #
 class Channel < ApplicationRecord
-  TYPES = %w(text voice).freeze
+  TYPES = %w(text voice video).freeze
 
   validates :name, presence: true, length: { in: 2..100, message: "Must be between 2 and 100 in length." }
   validates :server_id, presence: true
@@ -22,13 +22,13 @@ class Channel < ApplicationRecord
   belongs_to :server
   has_many :messages, inverse_of: :channel, dependent: :destroy
 
-  # after_create :add_channel_to_server
+  after_create :add_channel_to_server
 
-  # private
+  private
 
-  # def add_channel_to_server
-  #   server = Server.find(self.server_id)
-  #   server.channel_ids << self.id
-  #   server.save
-  # end
+  def add_channel_to_server
+    server = Server.find(self.server_id)
+    server.channel_ids << self.id
+    server.save
+  end
 end

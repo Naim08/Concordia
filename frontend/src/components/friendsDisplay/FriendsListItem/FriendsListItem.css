@@ -153,6 +153,28 @@
   padding-bottom: 1px;
 }
 
+.video-call-icon {
+  color: #b5bac1;
+  margin-left: 5px;
+  min-width: 36px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 100%;
+  background: #2b2d31;
+  position: relative;
+}
+
+.conversation-list-item {
+
+background-color: transparent;
+
+
+}
+
+.video-call-icon:hover {
+  background-color: #b5bac1;
+}
 @keyframes grow {
   0% {
     height: 0px;

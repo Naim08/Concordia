@@ -3,7 +3,7 @@ import { ServerToolTip } from "../modal/modal";
 import discordLogo from "../../assets/discord_logo.png";
 import icons8Logo from "../../assets/icons8-discord-128.svg";
 
-const ServerIndexList = ({ id, image, name, isServer = true }) => {
+const ServerIndexList = ({ id, image, name }) => {
   const [showModal, setShowModal] = useState(false);
   const [top, setTop] = useState(0);
   const [currentModal, setCurrentModal] = useState(null);
@@ -61,7 +61,7 @@ const ServerIndexList = ({ id, image, name, isServer = true }) => {
         <span className="tab-selector" />
       </div>
 
-      {showModal && currentModal === id && isServer && (
+      {showModal && currentModal === id && (
         <ServerToolTip top={top} onClose={() => setShowModal(false)}>
           <span className="tooltip">{name}</span>
         </ServerToolTip>

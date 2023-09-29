@@ -18,7 +18,7 @@ const CurrentUserMenu = () => {
     <div className="current-user-menu">
       <div className="current-user-display disabled">
         <UserIcon
-          picture={sessionUser.serverPhotoUrl}
+          picture={sessionUser.profilePictureUrl}
           status={sessionUser.onlineStatus}
           name={sessionUser.username.split("#")[0]}
         />

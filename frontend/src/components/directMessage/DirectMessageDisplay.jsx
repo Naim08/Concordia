@@ -95,10 +95,15 @@ import {
   createDirectMessage,
   updateDirectMessage,
   deleteDirectMessage,
+  fetchDirectMessages,
 } from "../../store/directMessage";
 const DirectMessageDisplay = () => {
   const dispatch = useDispatch();
   const { conversationId } = useParams();
+
+  useEffect(() => {
+    dispatch(fetchDirectMessages(conversationId));
+  }, [conversationId, dispatch]);
 
   // useEffect(() => {
   //   const conversationsSubscription = consumer.subscriptions.create(

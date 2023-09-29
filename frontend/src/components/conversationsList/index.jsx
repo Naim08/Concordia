@@ -17,6 +17,7 @@ import ConvoListItem from "../friendsDisplay/FriendsListItem/ConvoListItem";
 const ConversationsList = () => {
   const dispatch = useDispatch();
   const [conversations, setConversations] = useState([]);
+
   const convos = useSelector(getConversations);
 
   const { conversationId } = useParams();
@@ -53,17 +54,9 @@ const ConversationsList = () => {
     // };
   }, []);
 
-  const uniqueConvos = convos.filter((convo, index) => {
-    return (
-      convos.findIndex((convo2) => {
-        return convo.participant.id === convo2.participant.id;
-      }) === index
-    );
-  });
-
   return (
     <>
-      {uniqueConvos.map((convo) => {
+      {convos.map((convo) => {
         return (
           <ConvoListItem
             userId={convo.participant.id}
