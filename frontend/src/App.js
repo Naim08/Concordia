@@ -95,15 +95,17 @@ function App() {
             }
           />
         </Route>
-        <Route path="/voice" element={<ProtectedRoute />}>
+        <Route path="/video" element={<ProtectedRoute />}>
           <Route
             index
             element={
               <>
                 {" "}
                 <ServerSideBar />
+
                 <ServerPage />
-                <Voice />
+                 <Voice />
+
               </>
             }
           />

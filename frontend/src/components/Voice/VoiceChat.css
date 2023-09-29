@@ -68,3 +68,10 @@ video {
 .api-error a:visited {
   color: var(--white);
 }
+
+.video-feed {
+  background-color: slategrey;
+  min-width: 900px!important;
+}
+
+

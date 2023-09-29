@@ -1,3 +1,4 @@
+import "./VoiceChat.css"
 import { useState } from "react";
 import AgoraUIKit from "agora-react-uikit";
 
@@ -5,10 +6,9 @@ export default function Voice() {
   const [videoCall, setVideoCall] = useState(true);
 
   const rtcProps = {
-    appId: "ae917d6dd31d40dbb0d3e15ac98445e6",
-    channel: "Concordia",
-    token:
-      "007eJxTYHjdyxRbx/ukhYGb4bFFzOov4RemdLSGaP1wKLuykL0iOVCBITHV0tA8xSwlxdgwxcQgJSnJIMU41dA0MdnSwsTENNXsxiuR1IZARoY1Z/iYGBkgEMTnZHDOz0vOL0rJTGRgAACzvCDq",
+    appId:  process.env.AGORA_API_ID,
+    channel: process.env.AGORA_CHANNEL_NAME,
+    token: process.env.AGORA_TOKEN
   };
   const callbacks = {
     EndCall: () => setVideoCall(false),
@@ -27,7 +27,7 @@ export default function Voice() {
   };
 
   return videoCall ? (
-    <div style={{ display: "flex", width: "100vw", height: "100vh" }}>
+    <div style={{ display: "flex", width: "100vw", height: "100vh" }} className="video-feed">
       <AgoraUIKit rtcProps={rtcProps} callbacks={callbacks} />
     </div>
   ) : (

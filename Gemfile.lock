@@ -70,16 +70,16 @@ GEM
       activerecord (>= 3.2, < 8.0)
       rake (>= 10.4, < 14.0)
     aws-eventstream (1.2.0)
-    aws-partitions (1.820.0)
-    aws-sdk-core (3.181.0)
+    aws-partitions (1.830.0)
+    aws-sdk-core (3.184.0)
       aws-eventstream (~> 1, >= 1.0.2)
       aws-partitions (~> 1, >= 1.651.0)
       aws-sigv4 (~> 1.5)
       jmespath (~> 1, >= 1.6.1)
-    aws-sdk-kms (1.71.0)
-      aws-sdk-core (~> 3, >= 3.177.0)
+    aws-sdk-kms (1.72.0)
+      aws-sdk-core (~> 3, >= 3.184.0)
       aws-sigv4 (~> 1.1)
-    aws-sdk-s3 (1.134.0)
+    aws-sdk-s3 (1.136.0)
       aws-sdk-core (~> 3, >= 3.181.0)
       aws-sdk-kms (~> 1)
       aws-sigv4 (~> 1.6)
@@ -132,11 +132,9 @@ GEM
       net-protocol
     net-protocol (0.2.1)
       timeout
-    net-smtp (0.3.3)
+    net-smtp (0.4.0)
       net-protocol
     nio4r (2.5.9)
-    nokogiri (1.15.4-x86_64-darwin)
-      racc (~> 1.4)
     nokogiri (1.15.4-x86_64-linux)
       racc (~> 1.4)
     open-uri (0.3.0)
@@ -197,10 +195,9 @@ GEM
     websocket-driver (0.7.6)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
-    zeitwerk (2.6.11)
+    zeitwerk (2.6.12)
 
 PLATFORMS
-  x86_64-darwin-21
   x86_64-linux
 
 DEPENDENCIES
@@ -220,9 +217,6 @@ DEPENDENCIES
   rails (~> 7.0.7, >= 7.0.7.2)
   redis (~> 4.0)
   tzinfo-data
-
-RUBY VERSION
-   ruby 3.1.1p18
 
 BUNDLED WITH
    2.4.18

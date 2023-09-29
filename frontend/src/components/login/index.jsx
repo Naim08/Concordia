@@ -40,8 +40,8 @@ const LoginForm = () => {
     if (errors) dispatch(removeErrors());
     if (unauthorized) dispatch(setUnauthorized(false));
 
-    const credential = user === 1 ? "mmiah0890@gmail.com" : "naim02@gmail.com";
-    dispatch(login({ credential, password: "password" }));
+    const credential = user === 1 ? "yasuo@lol.com" : "aatrox@lol.com";
+    dispatch(login({ credential, password: "password123" }));
   };
 
   return (
@@ -99,13 +99,13 @@ const LoginForm = () => {
                   className="demo-button"
                   onClick={(e) => demoLogin(e, 1)}
                 >
-                  Login Demo User 1 <br />
+                  Login as Yasuo <br />
                 </button>
                 <button
                   className="demo-button"
                   onClick={(e) => demoLogin(e, 2)}
                 >
-                  Login Demo User 2 <br />
+                  Login Rando<br />
                 </button>
               </div>
               <span className="demo-text">
