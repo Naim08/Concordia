@@ -13,24 +13,26 @@ const SplashFooter = () => {
           <h3>Developer Links</h3>
           <ul>
             <li>
-              <Link to={{ pathname: "https://github.com/" }} target="_blank">
-                <i className="fa-brands fa-github fa-xl"></i>
+              <Link to= "https://github.com/Naim08" target="_blank">
+                {/* <i className="fa-brands fa-github fa-xl"></i> */}
+                <i class="fa-brands fa-github-alt fa-xl"></i>
                 <div>Github</div>
               </Link>
             </li>
             <li>
               <Link
-                to={{ pathname: "https://www.linkedin.com/" }}
+                to="https://www.linkedin.com/in/naimmiah/"
                 target="_blank"
               >
-                <i className="fa-brands fa-linkedin fa-xl"></i>
+                {/* <i className="fa-brands fa-linkedin fa-xl"></i> */}
+                <i class="fa-brands fa-linkedin-in fa-xl"></i>
                 <div>LinkedIn</div>
               </Link>
             </li>
             <li>
-              <Link to={{ pathname: "https://wellfound.com/" }} target="_blank">
+              <Link to="https://wellfound.com/" target="_blank">
                 <i className="fa-brands fa-angellist fa-xl"></i>
-                <div>Wellfound</div>
+                <div>Wellfound <span>Under Construction</span></div>
               </Link>
             </li>
           </ul>
