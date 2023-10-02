@@ -1,6 +1,7 @@
 # ConCordia:
 ConCordia is a web application that emulates the core features of the popular communication platform, Discord. Users can create and join servers, participate in real-time chat channels, send direct messages to other users, and manage their friend lists. The application supports both text-based communication and voice chat, providing a comprehensive communication experience.
 
+[Live Link](https://concordia.naimmiah.com)
 ---
 
 ## Technologies Used:
