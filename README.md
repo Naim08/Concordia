@@ -19,7 +19,6 @@ ConCordia is a web application that emulates the core features of the popular co
 - **WebRTC (Web Real-Time Communication)**: is a technology that enables real-time communication capabilities (like video and audio calling) in web browsers and mobile applications.
 
 
-
 # Feature Deep Dive:
 
 ## 1. Friends & Friend Requests:
