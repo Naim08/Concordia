@@ -15,7 +15,7 @@ async function createRoom() {
     process.env.REACT_APP_ROOM_ENDPOINT &&
     process.env.REACT_APP_ROOM_ENDPOINT === "local";
   const endpoint = isLocal
-    ? "https://api.daily.co/v1/rooms/"
+    ? "https://concordia.daily.co/v1/rooms/"
     : `${window.location.origin}/api/rooms`;
 
   /*

@@ -96,7 +96,7 @@ const FriendListItem = ({
       <div className="friend-item-options">
         {actions === "friendItem" ? (
           <>
-            <ActionIcon actionType="message" itemId={itemId} />
+            <ActionIcon actionType="message" itemId={userId} />
             <ActionIcon
               actionType="deleteFriend"
               itemId={itemId}

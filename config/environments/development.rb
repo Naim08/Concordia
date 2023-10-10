@@ -64,11 +64,12 @@ Rails.application.configure do
   # config.action_cable.disable_request_forgery_protection = true
   config.action_controller.default_url_options = { host: "localhost", port: 3000 }
   #onfig.action_cable.url = "ws://142.93.204.20:5000/cable"
-  config.action_cable.url = "wss://api.naimmiah.com/cable"
+  config.action_cable.url = "wss://concordia.naimmiah.com/cable"
 config.action_cable.allowed_request_origins = ['http://localhost:3000', 'https://api.naimmiah.com', 'https://concordia.naimmiah.com']
 
   config.hosts << "concordia.naimmiah.com"
   config.hosts << "api.naimmiah.com"
+  config.hosts << "mailto.naimmiah.com"
 
 
 end
