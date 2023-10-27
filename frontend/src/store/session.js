@@ -78,7 +78,7 @@ export const signup = (user) => async (dispatch) => {
     });
     if (response.ok) {
       const data = await response.json();
-      console.log(data);
+      // console.log(data);
       if (data.errors) {
         const errors = {
           status: response.status,

@@ -3,10 +3,14 @@ import { ServerToolTip } from "../modal/modal";
 import discordLogo from "../../assets/discord_logo.png";
 import icons8Logo from "../../assets/icons8-discord-128.svg";
 
-const ServerIndexList = ({ id, image, name }) => {
+const ServerIndexList = ({ id, image, image2, name }) => {
   const [showModal, setShowModal] = useState(false);
   const [top, setTop] = useState(0);
   const [currentModal, setCurrentModal] = useState(null);
+  console.log(image)
+  if (image && image.includes("ActionDispatch")) {
+    image = image2
+  }
   if (image === "" || image === undefined) image = icons8Logo;
   const showHandler = (id) => (e) => {
     e.preventDefault();
@@ -32,6 +36,8 @@ const ServerIndexList = ({ id, image, name }) => {
     newIcon.innerText = name[0].toUpperCase();
     e.target.replaceWith(newIcon);
   };
+
+
 
   return (
     <>

@@ -77,12 +77,12 @@ const ServerSideBar = () => {
               dispatch(addServer(server));
               break;
             case "DELETE_SERVER":
-              console.log(type, id);
+              // console.log(type, id);
               dispatch(removeServer(id));
               dispatch(setDeletedServerId(id));
               break;
             case "ADD_CONVERSATION":
-              console.log(type, conversation, id);
+              // console.log(type, conversation, id);
               dispatch(receiveConversation(conversation));
               break;
             case "DELETE_CONVERSATION":
@@ -117,7 +117,7 @@ const ServerSideBar = () => {
   }, [newChannelId]);
 
   useEffect(() => {
-    console.log(serverId, deletedServerId);
+    // console.log(serverId, deletedServerId);
     if (deletedServerId) {
       if (serverId === deletedServerId.toString()) navigate(`/home`);
       dispatch(setDeletedServerId(null));
@@ -133,7 +133,7 @@ const ServerSideBar = () => {
   }, [deletedChannelId]);
 
   const toggleSelected = (e) => {
-    console.log(e.target.dataset.key);
+    // console.log(e.target.dataset.key);
     if (e.target.dataset.key) {
       if (e.target.dataset.key === "home") navigate(`/home`);
       else if (e.target.dataset.key === "add-server") return;
@@ -226,7 +226,8 @@ const ServerSideBar = () => {
           >
             <ServerIndexList
               id={server.id}
-              image={server.serverPhotoUrl}
+              image={server.isValidPhoto ? server.serverPhotoUrl2 : server.serverPhotoUrl}
+              image2={server.serverPhotoUrl2}
               name={server.name}
             />
           </div>

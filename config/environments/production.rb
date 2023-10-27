@@ -31,15 +31,15 @@ Rails.application.configure do
   # config.action_dispatch.x_sendfile_header = "X-Accel-Redirect" # for NGINX
 
   # Store uploaded files on the local file system (see config/storage.yml for options).
-  config.active_storage.service = :local
-  # config.active_storage.service = :amazon_prod
+  ## config.active_storage.service = :local
+  config.active_storage.service = :amazon_prod
 
   # Mount Action Cable outside main process or domain.
   # config.action_cable.mount_path = nil
 
-  config.web_socket_server_url = "wss://concordia-ag3v.onrender.com/cable"
-  config.action_cable.url = "wss://concordia-ag3v.onrender.com/cable"
-  config.action_cable.allowed_request_origins = ["https://concordia-ag3v.onrender.com"]
+  config.web_socket_server_url = "wss://concordia-bb88b7d8f1b8.herokuapp.com//cable"
+  config.action_cable.url = "wss:/concordia-bb88b7d8f1b8.herokuapp.com/cable"
+  config.action_cable.allowed_request_origins = ["https://concordia-bb88b7d8f1b8.herokuapp.com/"]
 
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
   # config.force_ssl = true

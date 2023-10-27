@@ -57,7 +57,7 @@ const MessageItem = ({
   };
 
   if (!user || !message) return null;
-  console.log(message);
+
   return (
     <div
       className={`message-wrapper ${

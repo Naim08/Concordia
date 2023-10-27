@@ -155,7 +155,7 @@ const ServerPage = () => {
                 listEle &&
                 Math.round(listEle.scrollHeight - listEle.scrollTop) <=
                   listEle.clientHeight;
-              console.log(message);
+              // console.log(message);
               dispatch(receiveDirectMessage(message));
 
               if (message.author.id === sessionUser.id || atBottom)

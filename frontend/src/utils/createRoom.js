@@ -3,7 +3,7 @@
   See other available options at https://docs.daily.co/reference#create-room
  */
 async function createRoom() {
-  console.log(process.env);
+  // console.log(process.env);
   const exp = Math.round(Date.now() / 1000) + 60 * 30;
   const options = {
     properties: {

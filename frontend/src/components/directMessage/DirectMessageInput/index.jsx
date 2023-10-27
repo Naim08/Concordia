@@ -14,7 +14,7 @@ const DirectMessageInput = ({ conversationId }) => {
   const [enter, setEnter] = useState(false);
 
   const handleSubmit = () => {
-    console.log(message);
+
     const filtered = message.trim();
     if (!filtered) return;
     const messageData = {

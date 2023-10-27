@@ -1,4 +1,5 @@
 class Api::ServersController < ApplicationController
+  helper_method :aws_access_denied?
   before_action :require_logged_in, only: [:index, :show, :create, :update, :destroy]
   before_action :verify_owner, only: [:destroy, :update]
   wrap_parameters include: Server.attribute_names + [:photo], format: :multipart_form
@@ -12,6 +13,7 @@ class Api::ServersController < ApplicationController
     @server = Server.new(server_params)
     @server.owner_id = current_user.id
     @server.photo.attach(params[:server][:server_photo_url]) if params[:server][:server_photo_url]
+    @server.server_photo_url = @server.photo.url
     if @server.save
       # @server.members << current_user
       render :show, locals: { server: @server }
@@ -76,4 +78,18 @@ class Api::ServersController < ApplicationController
   def update_params
     params.require(:server).permit(:name, :server_photo_url)
   end
+
+def aws_access_denied?(url)
+return false if url.nil? || !(url.is_a?(String))
+return false if !(url.start_with?('http://', 'https://'))
+
+
+  response = Net::HTTP.get_response(URI.parse(url))
+
+  if response.is_a?(Net::HTTPSuccess)
+    false
+  else
+    response.body.include?('<Code>AccessDenied</Code>')
+  end
+end
 end

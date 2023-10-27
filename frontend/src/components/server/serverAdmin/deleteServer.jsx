@@ -14,8 +14,8 @@ const DeleteForm = ({ serverInfo, channelInfo, onClose, adminClose }) => {
 
   const handleDelete = (e) => {
     e.preventDefault();
-    console.log("channelInfo", channelInfo);
-    console.log("serverInfo", serverInfo);
+    // console.log("channelInfo", channelInfo);
+    // console.log("serverInfo", serverInfo);
     onClose();
     adminClose();
     if (channelInfo) {
