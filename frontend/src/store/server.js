@@ -4,6 +4,7 @@ import { addErrors } from "./errors";
 import { setNewServer } from "./ui";
 import { createSelector } from "reselect";
 import { Navigate } from "react-router-dom";
+import { setShowServerModal } from "./ui";
 
 const serversObjectSelector = (state) => state.entities.servers;
 const RESET_SERVERS = "servers/resetServers";
@@ -64,8 +65,10 @@ export const createServer = (formData) => async (dispatch) => {
     });
 
     const data = await response.json();
+
     dispatch(addServer(data.server));
     dispatch(setNewServer(data.server.id));
+    dispatch(setShowServerModal(false));
 
     return response;
   } catch (res) {
